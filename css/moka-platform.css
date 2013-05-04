@@ -21,6 +21,12 @@ body{
     font-weight         :   400;   
 }
 
+#wrapper{
+    position            :   relative;    
+    margin              :   0 auto;
+    width               :   90%;
+}
+
 /*
 *   main background colors
 */
