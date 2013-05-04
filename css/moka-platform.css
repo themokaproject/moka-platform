@@ -73,6 +73,10 @@ header{
     right               :   10px;
 }
 
+#playground{
+    position            :   relative;    
+}
+
 /*
 *   main background colors
 */
