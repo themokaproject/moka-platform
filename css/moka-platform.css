@@ -52,6 +52,11 @@ header{
     margin-bottom       :   3px;
 }
 
+.userInfoContent{
+    display             :   inline-block;
+    vertical-align      :   middle;
+}
+
 /*
 *   main background colors
 */
