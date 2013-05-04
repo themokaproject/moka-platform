@@ -99,6 +99,21 @@ header{
     margin-bottom       :   5px;
 }
 
+.itemContributions{    
+    width               :   100%;  
+    text-align          :   right;
+    position            :   absolute;
+    bottom              :   -2px;
+    right               :   5px;
+    
+}
+
+.itemContribution{
+    width               :   40px;
+    height              :   7px;
+    display             : inline-block;
+}
+
 /*
 *   main background colors
 */
