@@ -28,12 +28,12 @@ p{
 }
 
 header{
-    font-size           :   1.5em;
+    font-size           :   2em;
     border-bottom       :   1px solid #ccc;
-    padding-top         :   16px;
+    padding-top         :   20px;
     padding-left        :   16px;
     padding-right       :   16px;
-    padding-bottom      :   4px;
+    padding-bottom      :   10px;
 }
 
 #wrapper{
@@ -94,7 +94,7 @@ header{
 }
 
 .itemContentTitle{
-    font-size           :   1.1em;
+    font-size           :   1.2em;
     font-weight         :   500;
     margin-bottom       :   5px;
 }
@@ -111,7 +111,7 @@ header{
 .itemContribution{
     width               :   40px;
     height              :   7px;
-    display             : inline-block;
+    display             :   inline-block;
 }
 
 /*
