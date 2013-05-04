@@ -57,6 +57,13 @@ header{
     vertical-align      :   middle;
 }
 
+.userInfoPerCent{
+    font-size           :   0.7em;
+    border-right        :   1px solid #222;
+    padding-right       :   5px;
+    margin-right        :   5px;
+}
+
 /*
 *   main background colors
 */
