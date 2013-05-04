@@ -77,6 +77,14 @@ header{
     position            :   relative;    
 }
 
+.item{
+    padding             :   5px;
+    border              :   1px solid #ccc;
+    display             :   inline-block;
+    position            :   absolute;
+    background-color    :   #F9F9F9;
+}
+
 /*
 *   main background colors
 */
