@@ -85,6 +85,10 @@ header{
     background-color    :   #F9F9F9;
 }
 
+.itemContent{
+    padding             :   5px;
+}
+
 /*
 *   main background colors
 */
