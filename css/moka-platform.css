@@ -114,6 +114,10 @@ header{
     display             :   inline-block;
 }
 
+.img-fill-div{
+    width               :   100%;
+}
+
 /*
 *   main background colors
 */
