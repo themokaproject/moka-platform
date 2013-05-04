@@ -64,6 +64,15 @@ header{
     margin-right        :   5px;
 }
 
+.userInfoColor{
+    width               :   20px;
+    height              :   20px;
+    display             :   inline-block;
+    vertical-align      :   middle;
+    position            :   absolute;
+    right               :   10px;
+}
+
 /*
 *   main background colors
 */
