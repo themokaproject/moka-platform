@@ -12,3 +12,27 @@
 *           purple  #C394DB
 *
 */
+
+
+/*
+*   main background colors
+*/
+.bg-purple{
+    background-color    :   #C394DB;
+}
+
+.bg-red{
+    background-color    :   #FF7C7C;
+}
+
+.bg-blue{
+    background-color    :   #70CBED;
+}
+
+.bg-green{
+    background-color    :   #B7DB4C;
+}
+
+.bg-orange{
+    background-color    :   #FFCF70;
+}
