@@ -23,6 +23,10 @@ body{
     font-weight         :   400;   
 }
 
+p{
+    word-wrap           :   break-word;
+}
+
 header{
     font-size           :   1.5em;
     border-bottom       :   1px solid #ccc;
