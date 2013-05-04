@@ -22,6 +22,15 @@ body{
     font-weight         :   400;   
 }
 
+header{
+    font-size           :   1.5em;
+    border-bottom       :   1px solid #ccc;
+    padding-top         :   16px;
+    padding-left        :   16px;
+    padding-right       :   16px;
+    padding-bottom      :   4px;
+}
+
 #wrapper{
     position            :   relative;    
     margin              :   0 auto;
