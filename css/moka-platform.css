@@ -87,6 +87,7 @@ header{
     display             :   inline-block;
     position            :   absolute;
     background-color    :   #F9F9F9;
+    font-size           :   0.9em;
 }
 
 .itemContent{
