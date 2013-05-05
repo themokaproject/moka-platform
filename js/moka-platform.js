@@ -101,7 +101,7 @@ Moka.itemFactory = (function(cssRules){
     *       extends Item
     */
     var PostItItem = function(id){
-        Item.call(id);
+        Item.call(this, id);
     };
     
     PostItItem.prototype = new Item();
@@ -124,7 +124,7 @@ Moka.itemFactory = (function(cssRules){
     *       extends Item
     */
     var UmlClassItem = function(id){
-        Item.call(id);
+        Item.call(this, id);
     }
     
     UmlClassItem.prototype = new Item();
