@@ -46,13 +46,15 @@ Moka.defaultCssRules = (function(){
 *   A naive factory that creates elements for our platform
 *
 */
-Moka.itemFactory = (function(){
+Moka.itemFactory = (function(cssRules){
     "use strict";
+    
+    var cssRules = cssRules;
     
     var createItem = function(id){
         var newItem = $('<div id="'+id+'"class="item"/>');
-        newItem.append($('<div class="itemContent"/>'));
-        newItem.append($('<div class="itemContributions"/>'));
+        newItem.append($('<div class="'+cssRules.itemContentClass+'"/>'));
+        newItem.append($('<div class="'+cssRules.itemContributionsClass+'"/>'));
         return newItem;    
     };   
     
@@ -60,7 +62,7 @@ Moka.itemFactory = (function(){
         createItem      :   createItem,
     }
     
-})();
+})(Moka.defaultCssRules);
 
 
 
