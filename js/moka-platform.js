@@ -46,8 +46,8 @@ Moka.defaultCssRules = (function(){
         umlClassContentTitleClass   :   "umlTitle",
         umlAttributesClass          :   "umlAttributes",
         umlAttributeClass           :   "umlAttribute",
-        umlMethods                  :   "umlMethods",
-        umlMethod                   :   "umlMethod",
+        umlMethodsClass             :   "umlMethods",
+        umlMethodClass              :   "umlMethod",
         umlTitle                    :   "Uml Class",
     }
 })();
@@ -135,6 +135,10 @@ Moka.itemFactory = (function(cssRules){
             this.jQueryObject = jQueryObject;
         }else{
             Item.prototype.init.call(this, null);
+            this.getContentObject().addClass(cssRules.umlClassContentClass);
+            this.getContentTitleObject().addClass(cssRules.umlClassContentTitleClass);
+            this.getContentObject().append($('<div class="'+cssRules.umlAttributesClass+'" />'));
+            this.getContentObject().append($('<div class="'+cssRules.umlMethodsClass+'" />'));
         }
     }
     
