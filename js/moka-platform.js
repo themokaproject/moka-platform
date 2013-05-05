@@ -32,6 +32,10 @@ Moka.plateform = (function(configuration){
         console.log("message: " + event.data);
     };
     
+    var onWebSocketError = function(event){
+        console.log("error");
+    };
+    
     /*
     *   MokaPlatform Constructor
     */
@@ -62,7 +66,7 @@ Moka.plateform = (function(configuration){
             };
             
             webSocket.onerror = function(event){
-                console.log("error");
+                onWebSocketError(event);
             };
         
         },
