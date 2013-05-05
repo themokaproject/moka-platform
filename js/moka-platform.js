@@ -42,6 +42,12 @@ Moka.defaultCssRules = (function(){
         postItTitle                 :   "Post-it",
         postItContentClass          :   "postItContent",
         postItContent               :   "Here goes your note [...]",
+        umlClassContentClass        :   "umlContent",
+        umlClassContentTitleClass   :   "umlTitle",
+        umlAttributesClass          :   "umlAttributes",
+        umlAttributeClass           :   "umlAttribute",
+        umlMethods                  :   "umlMethods",
+        umlMethod                   :   "umlMethod",
     }
 })();
 
