@@ -64,14 +64,11 @@ Moka.itemFactory = (function(cssRules){
     };
     
     var createPostIt = function(id){
-        var newPostIt = createItem(id);
-        
+        var newPostIt = createItem(id);        
         newPostIt.find("."+cssRules.itemContentTitleClass)
-            .append(cssRules.postItTitle+" "+id);
-        
+            .append(cssRules.postItTitle+" "+id);        
         newPostIt.find("."+cssRules.itemContentClass)
-            .append($("<p>"+cssRules.postItContent+"</p>"));
-        
+            .append($("<p>"+cssRules.postItContent+"</p>"));        
         return newPostIt;
     }
     
