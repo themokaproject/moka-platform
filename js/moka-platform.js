@@ -28,6 +28,18 @@ Moka.plateform = (function(){
     return MokaPlatform;    
 })();
 
+/*
+*
+*   The default css rules to use for the item factory.
+*
+*/
+Moka.defaultCssRules = (function(){
+    return {
+        itemContentClass            :   "itemContent",
+        itemContributionsClass      :   "itemContributions",
+    }
+})();
+
 
 /*
 *
