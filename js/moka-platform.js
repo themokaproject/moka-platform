@@ -40,6 +40,7 @@ Moka.defaultCssRules = (function(){
         itemContributionsClass      :   "itemContributions",
         itemContentTitleClass       :   "itemContentTitle", 
         postItTitle                 :   "Post-it",
+        postItContentClass          :   "postItContent",
         postItContent               :   "Here goes your note [...]",
     }
 })();
@@ -53,27 +54,79 @@ Moka.defaultCssRules = (function(){
 Moka.itemFactory = (function(cssRules){
     "use strict";
     
-    var cssRules = cssRules;
+    var cssRules = cssRules;    
     
-    var createItem = function(id){
-        var newItem = $('<div id="'+cssRules.itemPrefixId+id+'"class="item"/>');
-        newItem.append($('<div class="'+cssRules.itemContentClass+'"/>')
-            .append('<div class="'+cssRules.itemContentTitleClass+'" />'));
-        newItem.append($('<div class="'+cssRules.itemContributionsClass+'"/>'));
-        return newItem;    
+    /*
+    *   Item
+    */
+    var Item = function(id){
+        this.id = id;
+        this.jQueryObject;
     };
     
+    Item.prototype = { 
+
+        init : function(jQueryObject){
+            if(jQueryObject){
+                this.jQueryObject = jQueryObject;
+            }else{
+                this.jQueryObject = $('<div id="'+cssRules.itemPrefixId+this.id+'"class="item"/>');
+                this.jQueryObject.append($('<div class="'+cssRules.itemContentClass+'"/>')
+                    .append('<div class="'+cssRules.itemContentTitleClass+'" />'));
+                this.jQueryObject.append($('<div class="'+cssRules.itemContributionsClass+'"/>')); 
+            }                   
+        },
+        
+        getContentObject : function(){
+            return this.jQueryObject.find("."+cssRules.itemContentClass);
+        },
+    
+        getContentTitleObject : function(){
+            return this.jQueryObject.find("."+cssRules.itemContentTitleClass);
+        },
+        
+        setTitle : function(title){
+            this.getContentTitleObject().text(title);
+        },
+    };
+    
+    /*
+    *   Post-It Item
+    *       extends Item
+    */
+    var PostItItem = function(id){
+        Item.call(id);
+    };
+    
+    PostItItem.prototype = new Item();
+    
+    PostItItem.prototype.init = function(jQueryObject){
+        if(jQueryObject){
+            this.jQueryObject = jQueryObject;
+        }else{
+            Item.prototype.init.call(this, null);
+            this.getContentObject().append($('<p class="'+cssRules.postItContentClass+'" />'));
+        }        
+    };
+    
+    PostItItem.prototype.setText = function(text){
+        this.jQueryObject.find('.'+cssRules.postItContentClass).text(text);
+    };
+    
+    
+    /*
+    *   Create a new post it
+    */
     var createPostIt = function(id){
-        var newPostIt = createItem(id);        
-        newPostIt.find("."+cssRules.itemContentTitleClass)
-            .append(cssRules.postItTitle+" "+id);        
-        newPostIt.find("."+cssRules.itemContentClass)
-            .append($("<p>"+cssRules.postItContent+"</p>"));        
+        var newPostIt = new PostItItem(id); 
+        newPostIt.init();
+        newPostIt.setTitle(cssRules.postItTitle+" "+id);               
+        newPostIt.setText($("<p>"+cssRules.postItContent+"</p>").text());        
         return newPostIt;
-    }
+    };    
     
     return {
-        createPostIt      :   createPostIt,
+        createPostIt    :   createPostIt,
     }
     
 })(Moka.defaultCssRules);
