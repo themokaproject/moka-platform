@@ -40,6 +40,7 @@ Moka.defaultCssRules = (function(){
         itemContributionsClass      :   "itemContributions",
         itemContentTitleClass       :   "itemContentTitle", 
         postItTitle                 :   "Post-it",
+        postItContent               :   "Here goes your note [...]",
     }
 })();
 
@@ -67,6 +68,9 @@ Moka.itemFactory = (function(cssRules){
         
         newPostIt.find("."+cssRules.itemContentTitleClass)
             .append(cssRules.postItTitle+" "+id);
+        
+        newPostIt.find("."+cssRules.itemContentClass)
+            .append($("<p>"+cssRules.postItContent+"</p>"));
         
         return newPostIt;
     }
