@@ -11,9 +11,11 @@ Moka.plateform = (function(){
     //private properties & methods
     var pong =  "pong";
     
-    //public API -- constructor
+    /*
+    *   MokaPlatform Constructor
+    */
     var MokaPlatform = function(){
-        //attributes  
+        this.users = []; 
     };
     
     //public API -- methods
