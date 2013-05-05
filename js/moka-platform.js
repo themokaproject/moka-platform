@@ -154,6 +154,11 @@ Moka.itemFactory = (function(cssRules){
         }
     };
     
+    UmlClassItem.prototype.addMethod = function(method){
+        this.methods.push(method);
+        this.updateMethods();
+    };
+    
     
     
     /*
