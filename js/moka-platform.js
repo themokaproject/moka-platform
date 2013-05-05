@@ -64,7 +64,7 @@ Moka.itemFactory = (function(cssRules){
     var cssRules = cssRules;    
     
     /*
-    *   Item
+    *   Item Constructor
     */
     var Item = function(id){
         this.id = id;
@@ -72,7 +72,10 @@ Moka.itemFactory = (function(cssRules){
     };
     
     Item.prototype = { 
-
+    
+        /*
+        *   Initialize the jQueryObject
+        */
         init : function(jQueryObject){
             if(jQueryObject){
                 this.jQueryObject = jQueryObject;
@@ -84,14 +87,25 @@ Moka.itemFactory = (function(cssRules){
             }                   
         },
         
+        /*
+        *   Retrieve the "Content" division as a jQueryObject
+        */
         getContentObject : function(){
             return this.jQueryObject.find("."+cssRules.itemContentClass);
         },
-    
+        
+        /*
+        *   Retrieve the "ContentTitle" division as a jQueryObject
+        */
         getContentTitleObject : function(){
             return this.jQueryObject.find("."+cssRules.itemContentTitleClass);
         },
         
+        /*
+        *   Set the title of the Item
+        *
+        *   @Param title
+        */
         setTitle : function(title){
             this.getContentTitleObject().text(title);
         },
