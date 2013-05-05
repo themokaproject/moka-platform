@@ -51,24 +51,11 @@ Moka.plateform = (function(configuration){
         },
         
         connexion : function(){
-            webSocket = new WebSocket('ws://'+configuration.host_ip+':'+configuration.port);
-            
-            webSocket.onopen = function(event){
-                onWebSocketOpen(event);
-            };
-            
-            webSocket.onclose = function(event){
-                onWebSocketClose(event);
-            };
-            
-            webSocket.onmessage = function(event){
-                onWebSocketMessage(event);
-            };
-            
-            webSocket.onerror = function(event){
-                onWebSocketError(event);
-            };
-        
+            webSocket = new WebSocket('ws://'+configuration.host_ip+':'+configuration.port);            
+            webSocket.onopen    = function(event){ onWebSocketOpen(event);      };            
+            webSocket.onclose   = function(event){ onWebSocketClose(event);     };            
+            webSocket.onmessage = function(event){ onWebSocketMessage(event);   };            
+            webSocket.onerror   = function(event){ onWebSocketError(event);     };       
         },
     
     };
