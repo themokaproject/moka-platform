@@ -126,6 +126,8 @@ Moka.itemFactory = (function(cssRules){
     */
     var UmlClassItem = function(id){
         Item.call(this, id);
+        this.attributes = [];
+        this.methods = [];
     };
     
     UmlClassItem.prototype = new Item();
@@ -141,6 +143,7 @@ Moka.itemFactory = (function(cssRules){
             this.getContentObject().append($('<div class="'+cssRules.umlMethodsClass+'" />'));
         }
     };
+    
     
     
     /*
