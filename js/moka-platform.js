@@ -112,7 +112,7 @@ Moka.itemFactory = (function(cssRules){
     };
     
     /*
-    *   Post-It Item
+    *   Post-It Item Constructor
     *       extends Item
     */
     var PostItItem = function(id){
@@ -121,6 +121,9 @@ Moka.itemFactory = (function(cssRules){
     
     PostItItem.prototype = new Item();
     
+    /*
+    *   Initialize the jQueryObject
+    */
     PostItItem.prototype.init = function(jQueryObject){
         if(jQueryObject){
             this.jQueryObject = jQueryObject;
@@ -130,6 +133,11 @@ Moka.itemFactory = (function(cssRules){
         }        
     };
     
+    /*
+    *   Set the text of the Post-It
+    *
+    *   @Param text
+    */
     PostItItem.prototype.setText = function(text){
         this.jQueryObject.find('.'+cssRules.postItContentClass).text(text);
     };
