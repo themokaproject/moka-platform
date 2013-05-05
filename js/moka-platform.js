@@ -35,8 +35,10 @@ Moka.plateform = (function(){
 */
 Moka.defaultCssRules = (function(){
     return {
+        itemPrefixId                :   "item_",
         itemContentClass            :   "itemContent",
         itemContributionsClass      :   "itemContributions",
+        itemContentTitleClass       :   "itemContentTitle",    
     }
 })();
 
@@ -52,11 +54,12 @@ Moka.itemFactory = (function(cssRules){
     var cssRules = cssRules;
     
     var createItem = function(id){
-        var newItem = $('<div id="'+id+'"class="item"/>');
-        newItem.append($('<div class="'+cssRules.itemContentClass+'"/>'));
+        var newItem = $('<div id="'+cssRules.itemPrefixId+id+'"class="item"/>');
+        newItem.append($('<div class="'+cssRules.itemContentClass+'"/>')
+            .append('<div class="'+cssRules.itemContentTitleClass+'" />'));
         newItem.append($('<div class="'+cssRules.itemContributionsClass+'"/>'));
         return newItem;    
-    };   
+    };
     
     return {
         createItem      :   createItem,
