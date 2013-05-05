@@ -129,6 +129,14 @@ Moka.itemFactory = (function(cssRules){
     
     UmlClassItem.prototype = new Item();
     
+    UmlClassItem.prototype.init = function(){
+        if(jQueryObject){
+            this.jQueryObject = jQueryObject;
+        }else{
+            Item.prototype.init.call(this, null);
+        }
+    }
+    
     
     /*
     *   Create a new post it
