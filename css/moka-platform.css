@@ -82,7 +82,6 @@ header{
 }
 
 .item{
-    padding             :   5px;
     border              :   1px solid #ccc;
     display             :   inline-block;
     position            :   absolute;
@@ -90,7 +89,7 @@ header{
 }
 
 .itemContent{
-    padding             :   5px;
+    padding             :   10px;
 }
 
 .itemContentTitle{
