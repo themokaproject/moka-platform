@@ -15,3 +15,9 @@
     left        :   330px;
     width       :   250px;
 }
+
+#firstUmlClass{
+    top         :   230px;
+    left        :   650px;
+    min-width   :   200px;
+}

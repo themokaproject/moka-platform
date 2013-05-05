@@ -117,6 +117,35 @@ header{
     width               :   100%;
 }
 
+.umlContent{
+    padding             :   0px;
+}
+
+
+.umlTitle{
+    text-align          :   center;
+    border-bottom       :   1px solid #ccc;
+    padding             :   5px;
+}
+
+.umlAttributes{
+    border-bottom       :   1px solid #ccc;
+    padding             :   5px;
+}
+
+.umlAttribut{
+    font-size           :   0.9em;
+}
+
+.umlMethods{
+    padding             :   5px;
+    margin-bottom       :   5px;
+}
+
+.umlMethod{
+    font-size           :   0.9em;
+}
+
 /*
 *   main background colors
 */
