@@ -20,6 +20,15 @@ Moka.plateform = (function(configuration){
     var configuration = configuration;
     var webSocket;
     
+    /*
+    *   Private Methods
+    *
+    *   onWebSocketOpen
+    *   onWebSocketClose
+    *   onWebSocketMessage
+    *   onWebSocketError
+    */    
+    
     var onWebSocketOpen = function(event){
         console.log("open");
     };
