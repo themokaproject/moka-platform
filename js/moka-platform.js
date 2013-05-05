@@ -159,6 +159,16 @@ Moka.itemFactory = (function(cssRules){
         this.updateMethods();
     };
     
+    UmlClassItem.prototype.updateAttributes = function(){
+        var attributeContainer = this.jQueryObject.find("."+cssRules.umlAttributesClass);
+        for(var i=0; i<this.attributes.length; i++){
+            if(this.attributes[i]){
+                attributeContainer.append(
+                    $('<div class="'+cssRules.umlAttributeClass+'" />').text(this.attributes[i]));
+            }
+        }
+    };
+    
     
     
     /*
