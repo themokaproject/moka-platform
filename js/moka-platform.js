@@ -12,11 +12,12 @@ Moka.platformConfiguration = (function(){
     };
 })();
 
-Moka.plateform = (function(){
+Moka.plateform = (function(configuration){
     "use strict";
     
     //private properties & methods
     var pong =  "pong";
+    var configuration = configuration;
     
     /*
     *   MokaPlatform Constructor
@@ -35,7 +36,7 @@ Moka.plateform = (function(){
     };
     
     return MokaPlatform;    
-})();
+})(Moka.platformConfiguration);
 
 /*
 *
