@@ -30,7 +30,7 @@ Moka.plateform = (function(){
 
 /*
 *
-*   The default css rules used for the item factory.
+*   The default css rules used by the item factory.
 *
 */
 Moka.defaultCssRules = (function(){
