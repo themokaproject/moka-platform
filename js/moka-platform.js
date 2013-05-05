@@ -23,7 +23,8 @@ Moka.plateform = (function(configuration){
     *   MokaPlatform Constructor
     */
     var MokaPlatform = function(){
-        this.users = []; 
+        this.users = [];
+        this.webSocket;
     };
     
     //public API -- methods
@@ -31,6 +32,27 @@ Moka.plateform = (function(configuration){
         
         ping : function(){
             console.log(pong);
+        },
+        
+        connexion : function(){
+            this.webSocket = new WebSocket('ws://'+configuration.host_ip+':'+configuration.port);
+            
+            this.webSocket.onopen = function(event){
+                console.log("open");
+            };
+            
+            this.webSocket.onclose = function(event){
+                console.log("close");
+            };
+            
+            this.webSocket.onmessage = function(event){
+                console.log("message " + event.data);
+            };
+            
+            this.webSocket.onerror = function(event){
+                console.log("error");
+            };
+        
         },
     
     };
