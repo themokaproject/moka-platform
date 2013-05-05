@@ -143,7 +143,7 @@ Moka.itemFactory = (function(cssRules){
     };
     
     /*
-    *   Uml Class Item
+    *   Uml Class Item Constructor
     *       extends Item
     */
     var UmlClassItem = function(id){
@@ -154,6 +154,9 @@ Moka.itemFactory = (function(cssRules){
     
     UmlClassItem.prototype = new Item();
     
+    /*
+    *   Initialize the jQueryObject
+    */
     UmlClassItem.prototype.init = function(jQueryObject){
         if(jQueryObject){
             this.jQueryObject = jQueryObject;
@@ -166,6 +169,9 @@ Moka.itemFactory = (function(cssRules){
         }
     };
     
+    /*
+    *   Update the displayed methods
+    */
     UmlClassItem.prototype.updateMethods = function(){
         var methodContainer = this.jQueryObject.find("."+cssRules.umlMethodsClass);
         for(var i=0; i<this.methods.length; i++){
@@ -176,11 +182,19 @@ Moka.itemFactory = (function(cssRules){
         }
     };
     
+    /*
+    *   Add a method to the Uml Class Item
+    *
+    *   @param method
+    */
     UmlClassItem.prototype.addMethod = function(method){
         this.methods.push(method);
         this.updateMethods();
     };
     
+    /*
+    *   Update the displayed attributes
+    */
     UmlClassItem.prototype.updateAttributes = function(){
         var attributeContainer = this.jQueryObject.find("."+cssRules.umlAttributesClass);
         for(var i=0; i<this.attributes.length; i++){
@@ -191,6 +205,11 @@ Moka.itemFactory = (function(cssRules){
         }
     };
     
+    /*
+    *   Add an attribute to the Uml Class Item
+    *
+    *   @param method
+    */
     UmlClassItem.prototype.addAttribute = function(attribute){
         this.attributes.push(attribute);
         this.updateAttributes();
