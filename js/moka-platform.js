@@ -129,7 +129,7 @@ Moka.itemFactory = (function(cssRules){
     
     UmlClassItem.prototype = new Item();
     
-    UmlClassItem.prototype.init = function(){
+    UmlClassItem.prototype.init = function(jQueryObject){
         if(jQueryObject){
             this.jQueryObject = jQueryObject;
         }else{
@@ -147,10 +147,20 @@ Moka.itemFactory = (function(cssRules){
         newPostIt.setTitle(cssRules.postItTitle+" "+id);               
         newPostIt.setText($("<p>"+cssRules.postItContent+"</p>").text());        
         return newPostIt;
-    };    
+    }; 
+
+    /*
+    *   Create a new uml class
+    */
+    var createUmlClass = function(id){
+        var newUmlClassItem = new UmlClassItem(id); 
+        newUmlClassItem.init();      
+        return newUmlClassItem;
+    }; 
     
     return {
         createPostIt    :   createPostIt,
+        createUmlClass  :   createUmlClass,
     }
     
 })(Moka.defaultCssRules);
