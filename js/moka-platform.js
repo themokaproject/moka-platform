@@ -48,6 +48,7 @@ Moka.defaultCssRules = (function(){
         umlAttributeClass           :   "umlAttribute",
         umlMethods                  :   "umlMethods",
         umlMethod                   :   "umlMethod",
+        umlTitle                    :   "Uml Class",
     }
 })();
 
@@ -155,6 +156,7 @@ Moka.itemFactory = (function(cssRules){
     var createUmlClass = function(id){
         var newUmlClassItem = new UmlClassItem(id); 
         newUmlClassItem.init();      
+        newUmlClassItem.setTitle(cssRules.umlTitle+" "+id);      
         return newUmlClassItem;
     }; 
     
