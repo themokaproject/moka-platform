@@ -113,6 +113,16 @@ Moka.itemFactory = (function(cssRules){
         this.jQueryObject.find('.'+cssRules.postItContentClass).text(text);
     };
     
+    /*
+    *   Uml Class Item
+    *       extends Item
+    */
+    var UmlClassItem = function(id){
+        Item.call(id);
+    }
+    
+    UmlClassItem.prototype = new Item();
+    
     
     /*
     *   Create a new post it
