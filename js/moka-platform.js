@@ -38,7 +38,8 @@ Moka.defaultCssRules = (function(){
         itemPrefixId                :   "item_",
         itemContentClass            :   "itemContent",
         itemContributionsClass      :   "itemContributions",
-        itemContentTitleClass       :   "itemContentTitle",    
+        itemContentTitleClass       :   "itemContentTitle", 
+        postItTitle                 :   "Post-it",
     }
 })();
 
@@ -61,8 +62,17 @@ Moka.itemFactory = (function(cssRules){
         return newItem;    
     };
     
+    var createPostIt = function(id){
+        var newPostIt = createItem(id);
+        
+        newPostIt.find("."+cssRules.itemContentTitleClass)
+            .append(cssRules.postItTitle+" "+id);
+        
+        return newPostIt;
+    }
+    
     return {
-        createItem      :   createItem,
+        createPostIt      :   createPostIt,
     }
     
 })(Moka.defaultCssRules);
