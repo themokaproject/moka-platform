@@ -169,6 +169,11 @@ Moka.itemFactory = (function(cssRules){
         }
     };
     
+    UmlClassItem.prototype.addAttribute = function(attribute){
+        this.attributes.push(attribute);
+        this.updateAttributes();
+    }
+    
     
     
     /*
