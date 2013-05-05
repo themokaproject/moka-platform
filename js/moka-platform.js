@@ -5,6 +5,13 @@
 
 var Moka = Moka || {};
 
+Moka.platformConfiguration = (function(){
+    return {
+        host_ip     :   "localhost",
+        port        :   "8887",
+    };
+})();
+
 Moka.plateform = (function(){
     "use strict";
     
@@ -51,7 +58,7 @@ Moka.defaultCssRules = (function(){
         umlMethodsClass             :   "umlMethods",
         umlMethodClass              :   "umlMethod",
         umlTitle                    :   "Uml Class",
-    }
+    };
 })();
 
 
@@ -243,7 +250,7 @@ Moka.itemFactory = (function(cssRules){
     return {
         createPostIt    :   createPostIt,
         createUmlClass  :   createUmlClass,
-    }
+    };
     
 })(Moka.defaultCssRules);
 
