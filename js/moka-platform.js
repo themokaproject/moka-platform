@@ -20,6 +20,10 @@ Moka.plateform = (function(configuration){
     var configuration = configuration;
     var webSocket;
     
+    var onOpen = function(event){
+        console.log("open");
+    };
+    
     /*
     *   MokaPlatform Constructor
     */
@@ -38,7 +42,7 @@ Moka.plateform = (function(configuration){
             webSocket = new WebSocket('ws://'+configuration.host_ip+':'+configuration.port);
             
             webSocket.onopen = function(event){
-                console.log("open");
+                onOpen();
             };
             
             webSocket.onclose = function(event){
