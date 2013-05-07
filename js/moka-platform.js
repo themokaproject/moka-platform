@@ -8,15 +8,17 @@ var Moka = Moka || {};
 Moka.platformConfiguration = (function(){
     "use strict";
     return {
-        host_ip     :   "localhost",
-        port        :   "8887",
-        userColors  :   [
+        host_ip             :   "localhost",
+        port                :   "8887",
+        userContainerCssId  :   "userInfoContainer",
+        userColors          :   [
                 "#FF7C7C",
                 "#70CBED",
                 "#B7DB4C",
                 "#FFCF70",
                 "#C394DB"                
         ],
+        
     };
 })();
 
@@ -26,6 +28,7 @@ Moka.plateform = (function(configuration){
     //private properties & methods
     var configuration = configuration;
     var webSocket;
+    var userContainer = $("#"+configuration.userContainerCssId);
     
     /*
     *   Private Methods
