@@ -67,6 +67,10 @@ Moka.plateform = (function(configuration){
             console.log(pong);
         },
         
+        setHostIp : function(ip){
+            configuration.host_ip = ip;
+        },
+        
         run : function(){
             webSocket = new WebSocket('ws://'+configuration.host_ip+':'+configuration.port);            
             webSocket.onopen    = function(event){ onWebSocketOpen(event);      };            
