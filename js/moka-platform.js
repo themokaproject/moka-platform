@@ -54,7 +54,7 @@ Moka.plateform = (function(configuration){
     
     var onWebSocketError = function(event){
         console.log("error");
-    };
+    };   
 
     
     /*
@@ -82,6 +82,8 @@ Moka.plateform = (function(configuration){
             webSocket.onmessage = function(event){ onWebSocketMessage(event);   };            
             webSocket.onerror   = function(event){ onWebSocketError(event);     };       
         },
+        
+        addUser : addUser,
     
     };
     
@@ -114,6 +116,16 @@ Moka.User = (function(){
 
         getId : function(){
             return id;
+        },
+        
+        displayInfo : function(container){
+            var info = $('<div class="userInfo" id="user_'+id+'" />');
+            var userInfoContent = $('<div class="userInfoContent" />');
+            userInfoContent.append($('<span class="userInfoPerCent">00%</span>'));
+            userInfoContent.append(" "+name);
+            info.append(userInfoContent);
+            info.append($('<div class="userInfoColor" />'));
+            container.append(info);
         },
     
     };
