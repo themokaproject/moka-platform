@@ -55,7 +55,12 @@ Moka.plateform = (function(configuration){
     var onWebSocketError = function(event){
         console.log("error");
     };   
-
+    
+    var addUser = function(id, name){
+        var color = configuration.userColors[userList.length];
+        var newUser = new Moka.User(id, name, color);
+        newUser.displayInfo(userContainer);
+    };
     
     /*
     *   MokaPlatform Constructor
