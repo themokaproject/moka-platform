@@ -53,7 +53,7 @@ Moka.plateform = (function(configuration){
     
     var onWebSocketError = function(event){
         console.log("error");
-    };
+    };    
     
     /*
     *   MokaPlatform Constructor
@@ -85,6 +85,39 @@ Moka.plateform = (function(configuration){
     
     return MokaPlatform;    
 })(Moka.platformConfiguration);
+
+/*
+*   Moka.User
+*/
+Moka.User = (function(){
+    "use strict";
+    
+    //private methods & attributes
+    var id = -1;
+    var name = "";
+    
+    //constructor
+    var User = function(p_id, p_name, p_color){
+        id = p_id;
+        name = p_name;
+        this.color = p_color; 
+    };
+    
+    //public methods
+    User.prototype = {
+    
+        getName : function(){
+            return name;
+        }, 
+
+        getId : function(){
+            return id;
+        },
+    
+    };
+    
+    return User;    
+})();
 
 /*
 *
