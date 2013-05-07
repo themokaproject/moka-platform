@@ -24,7 +24,6 @@ Moka.plateform = (function(configuration){
     "use strict";
     
     //private properties & methods
-    var pong =  "pong";
     var configuration = configuration;
     var webSocket;
     
@@ -61,11 +60,7 @@ Moka.plateform = (function(configuration){
     };
     
     //public API -- methods
-    MokaPlatform.prototype = {
-        
-        ping : function(){
-            console.log(pong);
-        },
+    MokaPlatform.prototype = {      
         
         setHostIp : function(ip){
             configuration.host_ip = ip;
