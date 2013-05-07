@@ -28,6 +28,7 @@ Moka.plateform = (function(configuration){
     //private properties & methods
     var configuration = configuration;
     var webSocket;
+    var userList = [];
     var userContainer = $("#"+configuration.userContainerCssId);
     
     /*
@@ -53,13 +54,14 @@ Moka.plateform = (function(configuration){
     
     var onWebSocketError = function(event){
         console.log("error");
-    };    
+    };
+
     
     /*
     *   MokaPlatform Constructor
     */
     var MokaPlatform = function(){
-        this.users = [];
+
     };
     
     //public API -- methods
