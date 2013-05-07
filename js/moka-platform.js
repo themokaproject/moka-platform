@@ -6,9 +6,17 @@
 var Moka = Moka || {};
 
 Moka.platformConfiguration = (function(){
+    "use strict";
     return {
         host_ip     :   "localhost",
         port        :   "8887",
+        userColors  :   [
+                "#FF7C7C",
+                "#70CBED",
+                "#B7DB4C",
+                "#FFCF70",
+                "#C394DB"                
+        ],
     };
 })();
 
