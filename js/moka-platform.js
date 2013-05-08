@@ -22,6 +22,30 @@ Moka.platformConfiguration = (function(){
     };
 })();
 
+/*
+*
+*   The different values use within the itemFactory
+*
+*/
+Moka.itemFactoryConfiguration = (function(){
+    return {
+        itemPrefixId                :   "item_",
+        itemContentClass            :   "itemContent",
+        itemContributionsClass      :   "itemContributions",
+        itemContentTitleClass       :   "itemContentTitle", 
+        postItTitle                 :   "Post-it",
+        postItContentClass          :   "postItContent",
+        postItContent               :   "Here goes your note [...]",
+        umlClassContentClass        :   "umlContent",
+        umlClassContentTitleClass   :   "umlTitle",
+        umlAttributesClass          :   "umlAttributes",
+        umlAttributeClass           :   "umlAttribute",
+        umlMethodsClass             :   "umlMethods",
+        umlMethodClass              :   "umlMethod",
+        umlTitle                    :   "Uml Class",
+    };
+})();
+
 Moka.plateform = (function(configuration){
     "use strict";
     
@@ -162,29 +186,6 @@ Moka.User = (function(){
     return User;    
 })();
 
-/*
-*
-*   The different values use within the itemFactory
-*
-*/
-Moka.itemFactoryConfiguration = (function(){
-    return {
-        itemPrefixId                :   "item_",
-        itemContentClass            :   "itemContent",
-        itemContributionsClass      :   "itemContributions",
-        itemContentTitleClass       :   "itemContentTitle", 
-        postItTitle                 :   "Post-it",
-        postItContentClass          :   "postItContent",
-        postItContent               :   "Here goes your note [...]",
-        umlClassContentClass        :   "umlContent",
-        umlClassContentTitleClass   :   "umlTitle",
-        umlAttributesClass          :   "umlAttributes",
-        umlAttributeClass           :   "umlAttribute",
-        umlMethodsClass             :   "umlMethods",
-        umlMethodClass              :   "umlMethod",
-        umlTitle                    :   "Uml Class",
-    };
-})();
 
 
 /*
