@@ -49,6 +49,9 @@ Moka.itemFactoryConfiguration = (function(){
     };
 })();
 
+/*
+*   The different values used within the User module
+*/
 Moka.userConfiguration = (function(){
     "use strict";
     return {
