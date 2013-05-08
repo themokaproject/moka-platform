@@ -402,8 +402,6 @@ Moka.itemFactory = (function(configuration){
     };
     
     return {
-        createPostIt    :   createPostIt,
-        createUmlClass  :   createUmlClass,
         createItem      :   createItem,
     };
     
