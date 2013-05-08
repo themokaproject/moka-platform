@@ -164,7 +164,7 @@ Moka.User = (function(){
 
 /*
 *
-*   The default css rules used by the item factory.
+*   The different values use within the itemFactory
 *
 */
 Moka.itemFactoryConfiguration = (function(){
