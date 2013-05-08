@@ -126,11 +126,13 @@ Moka.platform = (function(configuration){
     };
     
     var addItem = function(type, id){
+        if(getItemById(id) != null) return false;
         var temp = Moka.itemFactory.createItem(type, id);
         if(temp != null){
             itemList.push(temp);
             itemContainer.append(temp.jQueryObject);
         }
+        return true;
     };
     
     var getItemById = function(id){
