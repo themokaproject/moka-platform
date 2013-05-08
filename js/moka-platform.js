@@ -108,7 +108,7 @@ Moka.platform = (function(configuration){
         userList.push(newUser);
         userContainer.append(newUser.getUserInfo());
         return true;
-    };
+    };  
     
     var getUserById = function(id){
         for(var i=0; i< userList.length; i++){
@@ -129,7 +129,15 @@ Moka.platform = (function(configuration){
         var temp = Moka.itemFactory.createItem(type, id);
         if(temp != null){
             itemList.push(temp);
+            itemContainer.append(temp.jQueryObject);
         }
+    };
+    
+    var getItemById = function(id){
+        for(var i=0; i< itemList.length; i++){
+            if(itemList[i].getId() === id) return {index: i, item: itemList[i]};
+        }
+        return null;
     };
     
     
