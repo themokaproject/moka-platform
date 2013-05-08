@@ -31,6 +31,7 @@ Moka.platformConfiguration = (function(){
 Moka.itemFactoryConfiguration = (function(){
     "use strict";
     return {
+        itemCssClass                :   "item",
         itemPrefixId                :   "item_",
         itemContentClass            :   "itemContent",
         itemContributionsClass      :   "itemContributions",
@@ -229,7 +230,7 @@ Moka.itemFactory = (function(cssRules){
             if(jQueryObject){
                 this.jQueryObject = jQueryObject;
             }else{
-                this.jQueryObject = $('<div id="'+cssRules.itemPrefixId+this.id+'"class="item"/>');
+                this.jQueryObject = $('<div id="'+cssRules.itemPrefixId+this.id+'"class="'+cssRules.itemCssClass+'"/>');
                 this.jQueryObject.append($('<div class="'+cssRules.itemContentClass+'"/>')
                     .append('<div class="'+cssRules.itemContentTitleClass+'" />'));
                 this.jQueryObject.append($('<div class="'+cssRules.itemContributionsClass+'"/>')); 
