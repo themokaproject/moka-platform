@@ -135,9 +135,17 @@ Moka.platform = (function(configuration){
     
     var getItemById = function(id){
         for(var i=0; i< itemList.length; i++){
-            if(itemList[i].getId() === id) return {index: i, item: itemList[i]};
+            if(itemList[i].id === id) return {index: i, item: itemList[i]};
         }
         return null;
+    };
+    
+    var removeItem = function(id){
+        var temp = getItemById(id);
+        if(temp != null){
+            temp.item.jQueryObject.remove();
+            itemList.splice(temp.index, 1);
+        }
     };
     
     
@@ -170,6 +178,7 @@ Moka.platform = (function(configuration){
         addUser : addUser,
         removeUser : removeUser,
         addItem : addItem,
+        removeItem : removeItem,
     
     };
     
@@ -280,6 +289,7 @@ Moka.itemFactory = (function(configuration){
         setTitle : function(title){
             this.getContentTitleObject().text(title);
         },
+        
     };
     
     /*
