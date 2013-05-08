@@ -59,7 +59,7 @@ Moka.plateform = (function(configuration){
     var addUser = function(id, name){
         var color = configuration.userColors[userList.length];
         var newUser = new Moka.User(id, name, color);
-        newUser.displayInfo(userContainer);
+        userContainer.append(newUser.getUserInfo());
     };
     
     /*
@@ -104,12 +104,23 @@ Moka.User = (function(){
     //private methods & attributes
     var id = -1;
     var name = "";
+    var userInfo;
+    
+    var initUserInfo = function(){
+        userInfo = $('<div class="userInfo" id="user_'+id+'" />');
+        var userInfoContent = $('<div class="userInfoContent" />');
+        userInfoContent.append($('<span class="userInfoPerCent">00%</span>'));
+        userInfoContent.append(" "+name);
+        userInfo.append(userInfoContent);
+        userInfo.append($('<div class="userInfoColor" />'));
+    };
     
     //constructor
     var User = function(p_id, p_name, p_color){
         id = p_id;
         name = p_name;
-        this.color = p_color; 
+        this.color = p_color;
+        initUserInfo();
     };
     
     //public methods
@@ -123,14 +134,8 @@ Moka.User = (function(){
             return id;
         },
         
-        displayInfo : function(container){
-            var info = $('<div class="userInfo" id="user_'+id+'" />');
-            var userInfoContent = $('<div class="userInfoContent" />');
-            userInfoContent.append($('<span class="userInfoPerCent">00%</span>'));
-            userInfoContent.append(" "+name);
-            info.append(userInfoContent);
-            info.append($('<div class="userInfoColor" />'));
-            container.append(info);
+        getUserInfo : function(){            
+            return userInfo;
         },
     
     };
