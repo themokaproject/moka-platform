@@ -156,6 +156,13 @@ Moka.platform = (function(configuration){
         }
     };
     
+    var moveItem = function(id, top, left){
+        var temp = getItemById(id);
+        if(temp != null){
+            temp.item.move(top, left);
+        }
+    };
+    
     
     /*
     *   MokaPlatform Constructor
@@ -187,6 +194,7 @@ Moka.platform = (function(configuration){
         removeUser : removeUser,
         addItem : addItem,
         removeItem : removeItem,
+        moveItem : moveItem,
     
     };
     
