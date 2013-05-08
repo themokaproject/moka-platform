@@ -66,7 +66,7 @@ Moka.userConfiguration = (function(){
     };
 })();
 
-Moka.plateform = (function(configuration){
+Moka.platform = (function(configuration){
     "use strict";
     
     //private properties & methods
