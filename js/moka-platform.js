@@ -37,9 +37,11 @@ Moka.itemFactoryConfiguration = (function(){
         itemContentClass            :   "itemContent",
         itemContributionsClass      :   "itemContributions",
         itemContentTitleClass       :   "itemContentTitle", 
+        postItType                  :   "simpleNote",
         postItTitle                 :   "Post-it",
         postItContentClass          :   "postItContent",
         postItContent               :   "Here goes your note [...]",
+        umlClassType                :   "umlClass",
         umlClassContentClass        :   "umlContent",
         umlClassContentTitleClass   :   "umlTitle",
         umlAttributesClass          :   "umlAttributes",
@@ -393,9 +395,9 @@ Moka.itemFactory = (function(configuration){
     
     
     var createItem = function(type, id) {
-        if(type === "umlClass"){
+        if(type === configuration.umlClassType){
             return createUmlClass(id);
-        }else if( type === "postIt"){
+        }else if( type === configuration.postItType){
             return createPostIt(id);
         }        
         return null;
