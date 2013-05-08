@@ -208,10 +208,10 @@ Moka.User = (function(configuration){
 *   A naive factory that creates elements for our platform
 *
 */
-Moka.itemFactory = (function(cssRules){
+Moka.itemFactory = (function(configuration){
     "use strict";
     
-    var cssRules = cssRules;    
+    var configuration = configuration;    
     
     /*
     *   Item Constructor
@@ -230,10 +230,10 @@ Moka.itemFactory = (function(cssRules){
             if(jQueryObject){
                 this.jQueryObject = jQueryObject;
             }else{
-                this.jQueryObject = $('<div id="'+cssRules.itemPrefixId+this.id+'"class="'+cssRules.itemCssClass+'"/>');
-                this.jQueryObject.append($('<div class="'+cssRules.itemContentClass+'"/>')
-                    .append('<div class="'+cssRules.itemContentTitleClass+'" />'));
-                this.jQueryObject.append($('<div class="'+cssRules.itemContributionsClass+'"/>')); 
+                this.jQueryObject = $('<div id="'+configuration.itemPrefixId+this.id+'"class="'+configuration.itemCssClass+'"/>');
+                this.jQueryObject.append($('<div class="'+configuration.itemContentClass+'"/>')
+                    .append('<div class="'+configuration.itemContentTitleClass+'" />'));
+                this.jQueryObject.append($('<div class="'+configuration.itemContributionsClass+'"/>')); 
             }                   
         },
         
@@ -241,14 +241,14 @@ Moka.itemFactory = (function(cssRules){
         *   Retrieve the "Content" division as a jQueryObject
         */
         getContentObject : function(){
-            return this.jQueryObject.find("."+cssRules.itemContentClass);
+            return this.jQueryObject.find("."+configuration.itemContentClass);
         },
         
         /*
         *   Retrieve the "ContentTitle" division as a jQueryObject
         */
         getContentTitleObject : function(){
-            return this.jQueryObject.find("."+cssRules.itemContentTitleClass);
+            return this.jQueryObject.find("."+configuration.itemContentTitleClass);
         },
         
         /*
@@ -279,7 +279,7 @@ Moka.itemFactory = (function(cssRules){
             this.jQueryObject = jQueryObject;
         }else{
             Item.prototype.init.call(this, null);
-            this.getContentObject().append($('<p class="'+cssRules.postItContentClass+'" />'));
+            this.getContentObject().append($('<p class="'+configuration.postItContentClass+'" />'));
         }        
     };
     
@@ -289,7 +289,7 @@ Moka.itemFactory = (function(cssRules){
     *   @Param text
     */
     PostItItem.prototype.setText = function(text){
-        this.jQueryObject.find('.'+cssRules.postItContentClass).text(text);
+        this.jQueryObject.find('.'+configuration.postItContentClass).text(text);
     };
     
     /*
@@ -312,10 +312,10 @@ Moka.itemFactory = (function(cssRules){
             this.jQueryObject = jQueryObject;
         }else{
             Item.prototype.init.call(this, null);
-            this.getContentObject().addClass(cssRules.umlClassContentClass);
-            this.getContentTitleObject().addClass(cssRules.umlClassContentTitleClass);
-            this.getContentObject().append($('<div class="'+cssRules.umlAttributesClass+'" />'));
-            this.getContentObject().append($('<div class="'+cssRules.umlMethodsClass+'" />'));
+            this.getContentObject().addClass(configuration.umlClassContentClass);
+            this.getContentTitleObject().addClass(configuration.umlClassContentTitleClass);
+            this.getContentObject().append($('<div class="'+configuration.umlAttributesClass+'" />'));
+            this.getContentObject().append($('<div class="'+configuration.umlMethodsClass+'" />'));
         }
     };
     
@@ -323,11 +323,11 @@ Moka.itemFactory = (function(cssRules){
     *   Update the displayed methods
     */
     UmlClassItem.prototype.updateMethods = function(){
-        var methodContainer = this.jQueryObject.find("."+cssRules.umlMethodsClass);
+        var methodContainer = this.jQueryObject.find("."+configuration.umlMethodsClass);
         for(var i=0; i<this.methods.length; i++){
             if(this.methods[i]){
                 methodContainer.append(
-                    $('<div class="'+cssRules.umlMethodClass+'" />').text(this.methods[i]));
+                    $('<div class="'+configuration.umlMethodClass+'" />').text(this.methods[i]));
             }
         }
     };
@@ -346,11 +346,11 @@ Moka.itemFactory = (function(cssRules){
     *   Update the displayed attributes
     */
     UmlClassItem.prototype.updateAttributes = function(){
-        var attributeContainer = this.jQueryObject.find("."+cssRules.umlAttributesClass);
+        var attributeContainer = this.jQueryObject.find("."+configuration.umlAttributesClass);
         for(var i=0; i<this.attributes.length; i++){
             if(this.attributes[i]){
                 attributeContainer.append(
-                    $('<div class="'+cssRules.umlAttributeClass+'" />').text(this.attributes[i]));
+                    $('<div class="'+configuration.umlAttributeClass+'" />').text(this.attributes[i]));
             }
         }
     };
@@ -373,8 +373,8 @@ Moka.itemFactory = (function(cssRules){
     var createPostIt = function(id){
         var newPostIt = new PostItItem(id); 
         newPostIt.init();
-        newPostIt.setTitle(cssRules.postItTitle+" "+id);               
-        newPostIt.setText($("<p>"+cssRules.postItContent+"</p>").text());        
+        newPostIt.setTitle(configuration.postItTitle+" "+id);               
+        newPostIt.setText($("<p>"+configuration.postItContent+"</p>").text());        
         return newPostIt;
     }; 
 
@@ -384,7 +384,7 @@ Moka.itemFactory = (function(cssRules){
     var createUmlClass = function(id){
         var newUmlClassItem = new UmlClassItem(id); 
         newUmlClassItem.init();      
-        newUmlClassItem.setTitle(cssRules.umlTitle+" "+id);      
+        newUmlClassItem.setTitle(configuration.umlTitle+" "+id);      
         return newUmlClassItem;
     }; 
     
