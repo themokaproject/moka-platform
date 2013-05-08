@@ -125,6 +125,13 @@ Moka.plateform = (function(configuration){
         }
     };
     
+    var addItem = function(type, id){
+        var temp = Moka.itemFactory.createItem(type, id);
+        if(temp != null){
+            itemList.push(temp);
+        }
+    };
+    
     
     /*
     *   MokaPlatform Constructor
@@ -154,6 +161,7 @@ Moka.plateform = (function(configuration){
         
         addUser : addUser,
         removeUser : removeUser,
+        addItem : addItem,
     
     };
     
