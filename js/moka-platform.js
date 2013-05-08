@@ -63,6 +63,14 @@ Moka.plateform = (function(configuration){
         userContainer.append(newUser.getUserInfo());
     };
     
+    var getUserById = function(id){
+        for(var i=0; i< userList.length; i++){
+            if(userList[i].getId() === id) return userList[i];
+        }
+        return null;
+    };
+    
+    
     /*
     *   MokaPlatform Constructor
     */
@@ -137,7 +145,7 @@ Moka.User = (function(){
         
         getUserInfo : function(){            
             return userInfo;
-        },
+        },        
     
     };
     
