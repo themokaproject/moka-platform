@@ -161,7 +161,6 @@ Moka.User = (function(configuration){
     "use strict";
     
     //private methods & attributes
-    var configuration = configuration;
     var id = -1;
     var name = "";
     var userInfo;
