@@ -106,13 +106,13 @@ Moka.User = (function(){
     var name = "";
     var userInfo;
     
-    var initUserInfo = function(){
+    var initUserInfo = function(user){
         userInfo = $('<div class="userInfo" id="user_'+id+'" />');
         var userInfoContent = $('<div class="userInfoContent" />');
         userInfoContent.append($('<span class="userInfoPerCent">00%</span>'));
         userInfoContent.append(" "+name);
         userInfo.append(userInfoContent);
-        userInfo.append($('<div class="userInfoColor" />'));
+        userInfo.append($('<div class="userInfoColor" style="background-color: '+user.color+'" />'));
     };
     
     //constructor
@@ -120,7 +120,7 @@ Moka.User = (function(){
         id = p_id;
         name = p_name;
         this.color = p_color;
-        initUserInfo();
+        initUserInfo(this);
     };
     
     //public methods
