@@ -302,7 +302,18 @@ Moka.itemFactory = (function(configuration){
         
         getId : function(){
             return itemId;
-        }
+        },
+        
+        /*
+        *   Move the item 
+        *
+        *   @Param top
+        *   @Param left
+        */
+        move : function(top, left){
+            this.jQueryObject.css("top", top);
+            this.jQueryObject.css("left", left);
+        },
         
     };
     
