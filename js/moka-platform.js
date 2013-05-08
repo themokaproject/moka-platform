@@ -65,11 +65,18 @@ Moka.plateform = (function(configuration){
     
     var getUserById = function(id){
         for(var i=0; i< userList.length; i++){
-            if(userList[i].getId() === id) return userList[i];
+            if(userList[i].getId() === id) return {index: i, user: userList[i]};
         }
         return null;
     };
     
+    var removeUser = function(id){
+        var temp = getUserById(id);
+        if(temp != null){
+            temp.user.getUserInfo().remove();
+            userList.splice(temp.index, 1);
+        }
+    };
     
     /*
     *   MokaPlatform Constructor
@@ -98,6 +105,7 @@ Moka.plateform = (function(configuration){
         },
         
         addUser : addUser,
+        removeUser : removeUser,
     
     };
     
