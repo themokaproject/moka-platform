@@ -137,7 +137,7 @@ Moka.platform = (function(configuration){
     
     var getItemById = function(id){
         for(var i=0; i< itemList.length; i++){
-            if(itemList[i].id === id) return {index: i, item: itemList[i]};
+            if(itemList[i].getId() === id) return {index: i, item: itemList[i]};
         }
         return null;
     };
@@ -243,13 +243,15 @@ Moka.User = (function(configuration){
 *
 */
 Moka.itemFactory = (function(configuration){
-    "use strict";  
+    "use strict"; 
+
+    var itemId;
     
     /*
     *   Item Constructor
     */
     var Item = function(id){
-        this.id = id;
+        itemId = id;
         this.jQueryObject;
     };
     
@@ -262,7 +264,7 @@ Moka.itemFactory = (function(configuration){
             if(jQueryObject){
                 this.jQueryObject = jQueryObject;
             }else{
-                this.jQueryObject = $('<div id="'+configuration.itemPrefixId+this.id+'"class="'+configuration.itemCssClass+'"/>');
+                this.jQueryObject = $('<div id="'+configuration.itemPrefixId+itemId+'"class="'+configuration.itemCssClass+'"/>');
                 this.jQueryObject.append($('<div class="'+configuration.itemContentClass+'"/>')
                     .append('<div class="'+configuration.itemContentTitleClass+'" />'));
                 this.jQueryObject.append($('<div class="'+configuration.itemContributionsClass+'"/>')); 
@@ -291,6 +293,10 @@ Moka.itemFactory = (function(configuration){
         setTitle : function(title){
             this.getContentTitleObject().text(title);
         },
+        
+        getId : function(){
+            return itemId;
+        }
         
     };
     
