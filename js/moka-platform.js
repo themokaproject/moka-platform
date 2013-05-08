@@ -210,9 +210,7 @@ Moka.User = (function(configuration){
 *
 */
 Moka.itemFactory = (function(configuration){
-    "use strict";
-    
-    var configuration = configuration;    
+    "use strict";  
     
     /*
     *   Item Constructor
