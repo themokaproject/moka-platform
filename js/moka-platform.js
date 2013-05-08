@@ -83,6 +83,12 @@ Moka.platform = (function(configuration){
     *   onWebSocketClose
     *   onWebSocketMessage
     *   onWebSocketError
+    *   addUser
+    *   removeUser
+    *   getUserById
+    *   addItem
+    *   removeItem
+    *   getItemById
     */    
     
     var onWebSocketOpen = function(event){
