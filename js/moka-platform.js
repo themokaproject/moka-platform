@@ -48,6 +48,17 @@ Moka.itemFactoryConfiguration = (function(){
     };
 })();
 
+Moka.userConfiguration = (function(){
+    "use strict";
+    return {
+        userInfoCssClass            :   "userInfo",
+        userInfoContentCssClass     :   "userInfoContent",
+        userInfoPerCentCssClass     :   "userInfoPerCent",
+        userInfoColorCssClass       :   "userInfoColor",
+        
+    };
+})();
+
 Moka.plateform = (function(configuration){
     "use strict";
     
