@@ -5,6 +5,9 @@
 
 var Moka = Moka || {};
 
+/*
+*   The different values used within the platform
+*/
 Moka.platformConfiguration = (function(){
     "use strict";
     return {
@@ -23,11 +26,10 @@ Moka.platformConfiguration = (function(){
 })();
 
 /*
-*
-*   The different values use within the itemFactory
-*
+*   The different values used within the itemFactory
 */
 Moka.itemFactoryConfiguration = (function(){
+    "use strict";
     return {
         itemPrefixId                :   "item_",
         itemContentClass            :   "itemContent",
