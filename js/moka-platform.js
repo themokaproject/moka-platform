@@ -14,6 +14,7 @@ Moka.platformConfiguration = (function(){
         host_ip             :   "localhost",
         port                :   "8887",
         userContainerCssId  :   "userInfoContainer",
+        itemContainerCssId  :   "playground",
         userColors          :   [
                 "#FF7C7C",
                 "#70CBED",
@@ -71,6 +72,7 @@ Moka.plateform = (function(configuration){
     var userList = [];
     var userContainer = $("#"+configuration.userContainerCssId);
     var itemList = [];
+    var itemContainer = $("#"+configuration.itemContainerCssId);
     
     /*
     *   Private Methods
@@ -120,6 +122,7 @@ Moka.plateform = (function(configuration){
             userList.splice(temp.index, 1);
         }
     };
+    
     
     /*
     *   MokaPlatform Constructor
