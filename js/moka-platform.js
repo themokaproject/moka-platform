@@ -391,9 +391,20 @@ Moka.itemFactory = (function(configuration){
         return newUmlClassItem;
     }; 
     
+    
+    var createItem = function(type, id) {
+        if(type === "umlClass"){
+            return createUmlClass(id);
+        }else if( type === "postIt"){
+            return createPostIt(id);
+        }        
+        return null;
+    };
+    
     return {
         createPostIt    :   createPostIt,
         createUmlClass  :   createUmlClass,
+        createItem      :   createItem,
     };
     
 })(Moka.itemFactoryConfiguration);   
