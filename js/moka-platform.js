@@ -67,7 +67,6 @@ Moka.plateform = (function(configuration){
     "use strict";
     
     //private properties & methods
-    var configuration = configuration;
     var webSocket;
     var userList = [];
     var userContainer = $("#"+configuration.userContainerCssId);
