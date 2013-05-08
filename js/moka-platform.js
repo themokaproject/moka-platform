@@ -70,6 +70,7 @@ Moka.plateform = (function(configuration){
     var webSocket;
     var userList = [];
     var userContainer = $("#"+configuration.userContainerCssId);
+    var itemList = [];
     
     /*
     *   Private Methods
@@ -392,8 +393,4 @@ Moka.itemFactory = (function(configuration){
         createUmlClass  :   createUmlClass,
     };
     
-})(Moka.itemFactoryConfiguration);
-
-
-
-    
+})(Moka.itemFactoryConfiguration);   
