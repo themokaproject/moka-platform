@@ -167,7 +167,7 @@ Moka.User = (function(){
 *   The default css rules used by the item factory.
 *
 */
-Moka.defaultCssRules = (function(){
+Moka.itemFactoryConfiguration = (function(){
     return {
         itemPrefixId                :   "item_",
         itemContentClass            :   "itemContent",
@@ -377,7 +377,7 @@ Moka.itemFactory = (function(cssRules){
         createUmlClass  :   createUmlClass,
     };
     
-})(Moka.defaultCssRules);
+})(Moka.itemFactoryConfiguration);
 
 
 
