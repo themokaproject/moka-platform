@@ -154,21 +154,22 @@ Moka.plateform = (function(configuration){
 /*
 *   Moka.User
 */
-Moka.User = (function(){
+Moka.User = (function(configuration){
     "use strict";
     
     //private methods & attributes
+    var configuration = configuration;
     var id = -1;
     var name = "";
     var userInfo;
     
     var initUserInfo = function(user){
-        userInfo = $('<div class="userInfo" id="user_'+id+'" />');
-        var userInfoContent = $('<div class="userInfoContent" />');
-        userInfoContent.append($('<span class="userInfoPerCent">00%</span>'));
+        userInfo = $('<div class="'+configuration.userInfoCssClass+'" id="user_'+id+'" />');
+        var userInfoContent = $('<div class="'+configuration.userInfoContentCssClass+'" />');
+        userInfoContent.append($('<span class="'+configuration.userInfoPerCentCssClass+'">00%</span>'));
         userInfoContent.append(" "+name);
         userInfo.append(userInfoContent);
-        userInfo.append($('<div class="userInfoColor" style="background-color: '+user.color+'" />'));
+        userInfo.append($('<div class="'+configuration.userInfoColorCssClass+'" style="background-color: '+user.color+'" />'));
     };
     
     //constructor
@@ -197,7 +198,7 @@ Moka.User = (function(){
     };
     
     return User;    
-})();
+})(Moka.userConfiguration);
 
 
 
