@@ -57,10 +57,12 @@ Moka.plateform = (function(configuration){
     };   
     
     var addUser = function(id, name){
+        if(getUserById(id) != null) return false;
         var color = configuration.userColors[userList.length];
         var newUser = new Moka.User(id, name, color);
         userList.push(newUser);
         userContainer.append(newUser.getUserInfo());
+        return true;
     };
     
     var getUserById = function(id){
