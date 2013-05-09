@@ -167,7 +167,7 @@ Moka.platform = (function(configuration){
                 break;
                 
             case configuration.messageType.removeUser :
-                //TODO removeUser
+                removeUser(message.content.id);
                 break;
             
             case configuration.messageType.addItem :
@@ -185,7 +185,7 @@ Moka.platform = (function(configuration){
     };
     
     var getUserById = function(id){
-        for(var i=0; i< userList.length; i++){
+        for(var i=0; i< userList.length; i++){ 
             if(userList[i].getId() === id) return {index: i, user: userList[i]};
         }
         return null;
