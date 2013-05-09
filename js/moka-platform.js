@@ -32,7 +32,10 @@ var Moka = Moka || {};
 *       removeItem message structure
 *       - content : id
 *       example {type: "removeItem, content: {id: 7}}
-*   
+*
+*       moveItem message structure
+*       - content : id, top, left   
+*       example {type: "moveItem, content: {id: 7, top: 250, left: 433}}
 *
 *
 ****************************************************************************
