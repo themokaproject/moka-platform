@@ -19,7 +19,7 @@ var Moka = Moka || {};
 *
 *       addUser message structure
 *       - content : id, name
-*       example {type: "adduser, content: {id: 12, name:"Vincent B."}}
+*       example {type: "addUser, content: {id: 12, name:"Vincent B."}}
 *
 *       removeUser message structure
 *       - content : id
@@ -47,11 +47,18 @@ var Moka = Moka || {};
 Moka.platformConfiguration = (function(){
     "use strict";
     return {
-        host_ip             :   "localhost",
-        port                :   "8887",
-        userContainerCssId  :   "userInfoContainer",
-        itemContainerCssId  :   "playground",
-        userColors          :   [
+        host_ip                 :   "localhost",
+        port                    :   "8887",
+        userContainerCssId      :   "userInfoContainer",
+        itemContainerCssId      :   "playground",
+        messageType             :   {
+                addUser     :   "addUser",
+                removeUser  :   "removeUser",
+                addItem     :   "addItem",
+                removeItem  :   "removeItem",
+                moveItem    :   "moveItem"    
+        },
+        userColors              :   [
                 "#FF7C7C",
                 "#70CBED",
                 "#B7DB4C",
@@ -141,7 +148,7 @@ Moka.platform = (function(configuration){
     
     var onWebSocketError = function(event){
         console.log("error");
-    };   
+    }; 
     
     var addUser = function(id, name){
         if(getUserById(id) != null) return false;
@@ -354,8 +361,8 @@ Moka.itemFactory = (function(configuration){
         *   @Param left
         */
         move : function(top, left){
-            this.jQueryObject.css("top", top);
-            this.jQueryObject.css("left", left);
+            this.jQueryObject.css("top", top+"px");
+            this.jQueryObject.css("left", left+"px");
         },
         
     };
