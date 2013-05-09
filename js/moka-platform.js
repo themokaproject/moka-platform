@@ -273,46 +273,27 @@ Moka.platform = (function(configuration){
 *   Moka.User
 */
 Moka.User = (function(configuration){
-    "use strict";
+    "use strict";    
     
-    //private methods & attributes
-    var id = -1;
-    var name = "";
-    var userInfo;
-    
-    var initUserInfo = function(user){
-        userInfo = $('<div class="'+configuration.userInfoCssClass+'" id="user_'+id+'" />');
+    var initUserInfo = function(id, name, color){
+        var userInfo = $('<div class="'+configuration.userInfoCssClass+'" id="user_'+id+'" />');
         var userInfoContent = $('<div class="'+configuration.userInfoContentCssClass+'" />');
         userInfoContent.append($('<span class="'+configuration.userInfoPerCentCssClass+'">00%</span>'));
         userInfoContent.append(" "+name);
         userInfo.append(userInfoContent);
-        userInfo.append($('<div class="'+configuration.userInfoColorCssClass+'" style="background-color: '+user.color+'" />'));
+        userInfo.append($('<div class="'+configuration.userInfoColorCssClass+'" style="background-color: '+color+'" />'));
+        return userInfo;
     };
     
     //constructor
-    var User = function(p_id, p_name, p_color){
-        id = p_id;
-        name = p_name;
-        this.color = p_color;
-        initUserInfo(this);
-    };
-    
-    //public methods
-    User.prototype = {
-    
-        getName : function(){
-            return name;
-        }, 
-
-        getId : function(){
-            return id;
-        },
+    var User = function(id, name, color){
+        this.color = color;
+        var userInfo = initUserInfo(id, name, color);
         
-        getUserInfo : function(){            
-            return userInfo;
-        },        
-    
-    };
+        this.getId = function(){ return id; }; 
+        this.getName = function(){ return name; };
+        this.getUserInfo = function(){ return userInfo; };
+    };  
     
     return User;    
 })(Moka.userConfiguration);
