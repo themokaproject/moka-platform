@@ -10,11 +10,16 @@ var Moka = Moka || {};
 *   Communication Specification (JSON format)
 *
 *   WebSocket message structure
+*
+*       main structure
 *       - type
-*       - content
-*       example {type : "myType", content : "myContent"}
-*       
+*       - content       
 *       types currently supported : addUser, removeUser, addItem, removeItem, moveItem
+*       example {type: "myType", content: "myContent"}
+*
+*       addUser message structure
+*       - content : id, name
+*       example {type: "adduser, content: {id: 12, name:"Vincent B."}}
 *   
 *
 *
