@@ -262,7 +262,8 @@ Moka.platform = (function(configuration){
         removeUser : removeUser,
         addItem : addItem,
         removeItem : removeItem,
-        moveItem : moveItem,    
+        moveItem : moveItem,
+        processMessage : processMessage,
     };
     
     return MokaPlatform;    
