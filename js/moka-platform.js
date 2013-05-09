@@ -163,7 +163,7 @@ Moka.platform = (function(configuration){
         switch(message.type){
         
             case configuration.messageType.addUser :
-                //TODO addUser
+                addUser(message.content.id, message.content.name);
                 break;
                 
             case configuration.messageType.removeUser :
