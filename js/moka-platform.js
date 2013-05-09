@@ -179,7 +179,7 @@ Moka.platform = (function(configuration){
                 break;
 
             case configuration.messageType.moveItem :
-                //TODO moveItem
+                moveItem(message.content.id, message.content.top, message.content.left);
                 break;                        
         };
     };
