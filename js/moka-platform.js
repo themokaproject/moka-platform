@@ -20,6 +20,10 @@ var Moka = Moka || {};
 *       addUser message structure
 *       - content : id, name
 *       example {type: "adduser, content: {id: 12, name:"Vincent B."}}
+*
+*       removeUser message structure
+*       - content : id
+*       example {type: "removeUser, content: {id: 12}}
 *   
 *
 *
