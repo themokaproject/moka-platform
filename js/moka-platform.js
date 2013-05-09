@@ -157,7 +157,32 @@ Moka.platform = (function(configuration){
         userList.push(newUser);
         userContainer.append(newUser.getUserInfo());
         return true;
-    };  
+    }; 
+    
+    var processMessage = function(message){
+        switch(message.type){
+        
+            case configuration.messageType.addUser :
+                //TODO addUser
+                break;
+                
+            case configuration.messageType.removeUser :
+                //TODO removeUser
+                break;
+            
+            case configuration.messageType.addItem :
+                //TODO addItem
+                break;
+
+            case configuration.messageType.removeItem :
+                //TODO removeItem
+                break;
+
+            case configuration.messageType.moveItem :
+                //TODO moveItem
+                break;                        
+        };
+    };
     
     var getUserById = function(id){
         for(var i=0; i< userList.length; i++){
