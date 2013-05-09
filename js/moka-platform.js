@@ -5,6 +5,18 @@
 
 var Moka = Moka || {};
 
+/***************************************************************************
+****************************************************************************
+*   Communication Specification (JSON format)
+*
+*   WebSocket message structure
+*       - type
+*       - content
+*       example {type : "myType", content : "myContent"}
+*
+****************************************************************************
+****************************************************************************/
+
 /*
 *   The different values used within the platform
 */
@@ -194,8 +206,7 @@ Moka.platform = (function(configuration){
         removeUser : removeUser,
         addItem : addItem,
         removeItem : removeItem,
-        moveItem : moveItem,
-    
+        moveItem : moveItem,    
     };
     
     return MokaPlatform;    
