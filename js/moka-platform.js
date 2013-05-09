@@ -14,7 +14,7 @@ var Moka = Moka || {};
 *       - content
 *       example {type : "myType", content : "myContent"}
 *       
-*       types currently supported : addUser, remoceUser, addItem, removeItem, moveItem
+*       types currently supported : addUser, removeUser, addItem, removeItem, moveItem
 *   
 *
 *
