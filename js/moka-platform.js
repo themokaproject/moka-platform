@@ -28,6 +28,10 @@ var Moka = Moka || {};
 *       addItem message structure
 *       - content : type, id
 *       example {type: "addItem, content: {type: "umlClass", id: 7}}
+*
+*       removeItem message structure
+*       - content : id
+*       example {type: "removeItem, content: {id: 7}}
 *   
 *
 *
