@@ -258,6 +258,7 @@ Moka.platform = (function(configuration){
             webSocket.onerror   = function(event){ onWebSocketError(event);     };       
         },
         
+        //TODO remove
         addUser : addUser,
         removeUser : removeUser,
         addItem : addItem,
