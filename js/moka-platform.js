@@ -171,7 +171,7 @@ Moka.platform = (function(configuration){
                 break;
             
             case configuration.messageType.addItem :
-                //TODO addItem
+                addItem(message.content.type, message.content.id);
                 break;
 
             case configuration.messageType.removeItem :
