@@ -14,7 +14,7 @@ var Moka = Moka || {};
 *       main structure
 *       - type
 *       - content       
-*       types currently supported : addUser, removeUser, addItem, removeItem, moveItem
+*       types currently supported : addUser, removeUser, addItem, removeItem, moveItem, selectItem
 *       example {type: "myType", content: "myContent"}
 *
 *       addUser message structure
@@ -36,6 +36,11 @@ var Moka = Moka || {};
 *       moveItem message structure
 *       - content : id, top, left   
 *       example {type: "moveItem, content: {id: 7, top: 250, left: 433}}
+*
+*       selectItem message structure
+*       - content : userId, itemId
+*       example {type: "selectItem", content: {userId: 12, itemId: 7}}
+*
 *
 *
 ****************************************************************************
