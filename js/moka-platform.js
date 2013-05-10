@@ -18,24 +18,24 @@ var Moka = Moka || {};
 *       example {type: "myType", content: "myContent"}
 *
 *       addUser message structure
-*       - content : id, name
-*       example {type: "addUser, content: {id: 12, name:"Vincent B."}}
+*       - content : userId, name
+*       example {type: "addUser, content: {userId: 12, name:"Vincent B."}}
 *
 *       removeUser message structure
-*       - content : id
-*       example {type: "removeUser, content: {id: 12}}
+*       - content : userId
+*       example {type: "removeUser, content: {userId: 12}}
 *
 *       addItem message structure
-*       - content : type, id
-*       example {type: "addItem, content: {type: "umlClass", id: 7}}
+*       - content : type, itemId
+*       example {type: "addItem, content: {type: "umlClass", itemId: 7}}
 *
 *       removeItem message structure
-*       - content : id
-*       example {type: "removeItem, content: {id: 7}}
+*       - content : itemId
+*       example {type: "removeItem, content: {itemId: 7}}
 *
 *       moveItem message structure
-*       - content : id, top, left   
-*       example {type: "moveItem, content: {id: 7, top: 250, left: 433}}
+*       - content : itemId, top, left   
+*       example {type: "moveItem, content: {itemId: 7, top: 250, left: 433}}
 *
 *       selectItem message structure
 *       - content : userId, itemId
