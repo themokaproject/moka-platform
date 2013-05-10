@@ -174,23 +174,23 @@ Moka.platform = (function(configuration){
         switch(message.type){
         
             case configuration.messageType.addUser :
-                addUser(message.content.id, message.content.name);
+                addUser(message.content.userId, message.content.name);
                 break;
                 
             case configuration.messageType.removeUser :
-                removeUser(message.content.id);
+                removeUser(message.content.userId);
                 break;
             
             case configuration.messageType.addItem :
-                addItem(message.content.type, message.content.id);
+                addItem(message.content.type, message.content.itemId);
                 break;
 
             case configuration.messageType.removeItem :
-                removeItem(message.content.id);
+                removeItem(message.content.itemId);
                 break;
 
             case configuration.messageType.moveItem :
-                moveItem(message.content.id, message.content.top, message.content.left);
+                moveItem(message.content.itemId, message.content.top, message.content.left);
                 break;
 
             case configuration.messageType.selectItem :
