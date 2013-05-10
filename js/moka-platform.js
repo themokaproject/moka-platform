@@ -296,6 +296,7 @@ Moka.User = (function(configuration){
         this.getUserInfo = function(){ return userInfo; };
     };  
     
+    
     return User;    
 })(Moka.userConfiguration);
 
@@ -345,6 +346,13 @@ Moka.itemFactory = (function(configuration){
         */
         getContentTitleObject : function(){
             return this.jQueryObject.find("."+configuration.itemContentTitleClass);
+        },
+        
+        /*
+        *   Retrieve the "Contributions" division as a jQueryObject        
+        */
+        getContributions : function(){
+            return this.jQueryObject.find("."+configuration.itemContributionsClass);
         },
         
         /*
