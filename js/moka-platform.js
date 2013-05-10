@@ -61,7 +61,8 @@ Moka.platformConfiguration = (function(){
                 removeUser  :   "removeUser",
                 addItem     :   "addItem",
                 removeItem  :   "removeItem",
-                moveItem    :   "moveItem"    
+                moveItem    :   "moveItem",
+                selectItem  :   "selectItem",
         },
         userColors              :   [
                 "#FF7C7C",
@@ -185,8 +186,20 @@ Moka.platform = (function(configuration){
 
             case configuration.messageType.moveItem :
                 moveItem(message.content.id, message.content.top, message.content.left);
-                break;                        
+                break;
+
+            case configuration.messageType.selectItem :
+                selectItem(message.content.userId, message.content.itemId);
+                break;
         };
+    };
+    
+    var selectItem = function(userId, itemId){
+        var itemRes = getItemById(itemId);
+        var userRes = getUserById(userId);
+        if(itemRes != null && userRes != null){
+            userRes.user.selectItem(itemRes.item);
+        }
     };
     
     var getUserById = function(id){
@@ -304,7 +317,7 @@ Moka.User = (function(configuration){
     User.prototype = {
         selectItem : function(item){
             this.selection = $('<div class="itemContribution"/>');
-            this.selection.css("color", this.color);
+            this.selection.css("background-color", this.color);
             item.getContributions().append(this.selection);
         },
     };
