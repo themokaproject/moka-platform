@@ -308,7 +308,7 @@ Moka.User = (function(configuration){
     var User = function(id, name, color){
         this.color = color;
         var userInfo = initUserInfo(id, name, color);
-        this.selection;
+        this.selection = null;
         this.getId = function(){ return id; }; 
         this.getName = function(){ return name; };
         this.getUserInfo = function(){ return userInfo; };
@@ -316,9 +316,11 @@ Moka.User = (function(configuration){
     
     User.prototype = {
         selectItem : function(item){
-            this.selection = $('<div class="itemContribution"/>');
-            this.selection.css("background-color", this.color);
-            item.getContributions().append(this.selection);
+            if(this.selection === null){
+                this.selection = $('<div class="itemContribution"/>');
+                this.selection.css("background-color", this.color);
+                item.getContributions().append(this.selection);
+            }            
         },
     };
     
