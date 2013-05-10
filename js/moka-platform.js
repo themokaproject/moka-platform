@@ -61,19 +61,20 @@ Moka.platformConfiguration = (function(){
         userContainerCssId      :   "userInfoContainer",
         itemContainerCssId      :   "playground",
         messageType             :   {
-                addUser     :   "addUser",
-                removeUser  :   "removeUser",
-                addItem     :   "addItem",
-                removeItem  :   "removeItem",
-                moveItem    :   "moveItem",
-                selectItem  :   "selectItem",
+            addUser         :   "addUser",
+            removeUser      :   "removeUser",
+            addItem         :   "addItem",
+            removeItem      :   "removeItem",
+            moveItem        :   "moveItem",
+            selectItem      :   "selectItem",
+            unselectItem    :   "unselectItem",
         },
         userColors              :   [
-                "#FF7C7C",
-                "#70CBED",
-                "#B7DB4C",
-                "#FFCF70",
-                "#C394DB"                
+            "#FF7C7C",
+            "#70CBED",
+            "#B7DB4C",
+            "#FFCF70",
+            "#C394DB"                
         ],
         
     };
@@ -195,7 +196,18 @@ Moka.platform = (function(configuration){
             case configuration.messageType.selectItem :
                 selectItem(message.content.userId, message.content.itemId);
                 break;
+                
+            case configuration.messageType.unselectItem :
+                unselectItem(message.content.userId);
+                break;
         };
+    };
+    
+    var unselectItem = function(userId){
+        var userSearch = getUserById(userId);
+        if(userSearch != null){
+            userSearch.user.unselectItem();
+        }
     };
     
     var selectItem = function(userId, itemId){
