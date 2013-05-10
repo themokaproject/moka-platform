@@ -315,12 +315,18 @@ Moka.User = (function(configuration){
     };  
     
     User.prototype = {
+    
         selectItem : function(item){
             if(this.selection === null){
                 this.selection = $('<div class="itemContribution"/>');
                 this.selection.css("background-color", this.color);
                 item.getContributions().append(this.selection);
             }            
+        },
+        
+        unselectItem : function(){
+            this.selection.remove();
+            this.selection = null;
         },
     };
     
