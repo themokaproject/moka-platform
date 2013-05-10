@@ -293,11 +293,6 @@ Moka.platform = (function(configuration){
         },
         
         //TODO remove
-        addUser : addUser,
-        removeUser : removeUser,
-        addItem : addItem,
-        removeItem : removeItem,
-        moveItem : moveItem,
         processMessage : processMessage,
     };
     
