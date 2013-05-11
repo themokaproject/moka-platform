@@ -171,34 +171,36 @@ Moka.platform = (function(configuration){
     }; 
     
     var processMessage = function(message){
-        switch(message.type){
+        var messageContent = message.content;
+        var messageTypes = configuration.messageType;
         
-            case configuration.messageType.addUser :
-                addUser(message.content.userId, message.content.name);
+        switch(message.type){        
+            case messageTypes.addUser :
+                addUser(messageContent.userId, messageContent.name);
                 break;
                 
-            case configuration.messageType.removeUser :
-                removeUser(message.content.userId);
+            case messageTypes.removeUser :
+                removeUser(messageContent.userId);
                 break;
             
-            case configuration.messageType.addItem :
-                addItem(message.content.type, message.content.itemId);
+            case messageTypes.addItem :
+                addItem(messageContent.type, messageContent.itemId);
                 break;
 
-            case configuration.messageType.removeItem :
-                removeItem(message.content.itemId);
+            case messageTypes.removeItem :
+                removeItem(messageContent.itemId);
                 break;
 
-            case configuration.messageType.moveItem :
-                moveItem(message.content.itemId, message.content.top, message.content.left);
+            case messageTypes.moveItem :
+                moveItem(messageContent.itemId, messageContent.top, messageContent.left);
                 break;
 
-            case configuration.messageType.selectItem :
-                selectItem(message.content.userId, message.content.itemId);
+            case messageTypes.selectItem :
+                selectItem(messageContent.userId, messageContent.itemId);
                 break;
                 
-            case configuration.messageType.unselectItem :
-                unselectItem(message.content.userId);
+            case messageTypes.unselectItem :
+                unselectItem(messageContent.userId);
                 break;
         };
     };
@@ -219,7 +221,8 @@ Moka.platform = (function(configuration){
     };
     
     var getUserById = function(id){
-        for(var i=0; i< userList.length; i++){ 
+        var userListLength = userList.length;
+        for(var i=0; i< userListLength; i++){ 
             if(userList[i].getId() === id) return {index: i, user: userList[i]};
         }
         return null;
@@ -244,7 +247,8 @@ Moka.platform = (function(configuration){
     };
     
     var getItemById = function(id){
-        for(var i=0; i< itemList.length; i++){
+        var itemListLength = itemList.length;
+        for(var i=0; i< itemListLength; i++){
             if(itemList[i].getId() === id) return {index: i, item: itemList[i]};
         }
         return null;
@@ -472,10 +476,11 @@ Moka.itemFactory = (function(configuration){
             this.jQueryObject = jQueryObject;
         }else{
             Item.prototype.init.call(this, null);
-            this.getContentObject().addClass(configuration.umlClassContentClass);
+            var contentObject = this.getContentObject();
+            contentObject.addClass(configuration.umlClassContentClass);
             this.getContentTitleObject().addClass(configuration.umlClassContentTitleClass);
-            this.getContentObject().append($('<div class="'+configuration.umlAttributesClass+'" />'));
-            this.getContentObject().append($('<div class="'+configuration.umlMethodsClass+'" />'));
+            contentObject.append($('<div class="'+configuration.umlAttributesClass+'" />'));
+            contentObject.append($('<div class="'+configuration.umlMethodsClass+'" />'));
         }
     };
     
