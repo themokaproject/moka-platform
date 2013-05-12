@@ -154,7 +154,7 @@ Moka.platform = (function(configuration){
     };
     
     var onWebSocketMessage = function(event){
-        console.log("message: " + event.data);
+        processMessage(JSON.parse(event.data));
     };
     
     var onWebSocketError = function(event){
@@ -201,6 +201,10 @@ Moka.platform = (function(configuration){
                 
             case messageTypes.unselectItem :
                 unselectItem(messageContent.userId);
+                break;
+                
+            default:
+                console.log("unsupported message: " + message);
                 break;
         };
     };
