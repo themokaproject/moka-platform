@@ -90,6 +90,7 @@ header{
 
 .itemContent{
     padding             :   10px;
+    min-width           :   150px;    
 }
 
 .itemContentTitle{
