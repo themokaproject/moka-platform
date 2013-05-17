@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <title>Moka-platform</title>
+        <link rel="stylesheet" href="css/reset.css"/>
+        <link rel="stylesheet" href="css/moka-platform.css"/>
+    </head>
+    <body>
+    
+        <div id="wrapper">
+            
+            <header>
+                Moka-Platform
+            </header>            
+            
+           <!-- 
+                This div is aimed at displaying the current 
+                users connected to the platform.
+            -->            
+            <div id="userInfoContainer">            
+                
+            </div>
+            
+            <!-- 
+                This div is aimed at displaying all the current
+                items created by the users. 
+            -->
+            <div id="playground">
+                
+            </div>
+            
+            </div>
+        
+        </div>
+        
+        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script src="js/moka-platform.js"></script>
+        
+        <script type="text/javascript">                
+                var platform = new Moka.platform();
+                platform.run();                
+        </script>
+
+    </body>
+</html>
