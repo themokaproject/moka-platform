@@ -120,6 +120,32 @@
         </div>
         
         <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script src="js/moka-platform.js"></script>
+        
+        <script type="text/javascript">                
+                var platform = new Moka.platform();
+                platform.run();
+                
+                platform.processMessage({type: "addUser", content: {name: "Michelle V.", userId: 13} });
+                platform.processMessage({type: "addUser", content: {name: "Didier A.", userId: 14} });
+                platform.processMessage({type: "addUser", content: {name: "Henry U.", userId: 15} });                
+                
+                platform.processMessage({type: "addItem", content: {type: "umlClass", itemId: 12} });
+                platform.processMessage({type: "moveItem", content: {itemId: 12, top: 400, left: 100} });
+                
+                platform.processMessage({type: "addUser", content: {name: "Vincent B.", userId: 33} });
+                platform.processMessage({type: "removeUser", content: {userId: 13} });
+                platform.processMessage({type: "removeUser", content: {userId: 15} });
+                
+                platform.processMessage({type: "addItem", content: {type: "umlClass", itemId: 15} });
+                platform.processMessage({type: "moveItem", content: {itemId: 15, top: 350, left: 540} });
+                
+                platform.processMessage({type: "selectItem", content: {userId: 33, itemId: 15} });
+                platform.processMessage({type: "selectItem", content: {userId: 33, itemId: 15} });
+                platform.processMessage({type: "unselectItem", content: {userId: 33} });
+                platform.processMessage({type: "selectItem", content: {userId: 33, itemId: 12} });
+                
+        </script>
 
     </body>
 </html>

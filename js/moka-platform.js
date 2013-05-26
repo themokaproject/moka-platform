@@ -26,8 +26,8 @@ var Moka = Moka || {};
 *       example {type: "removeUser, content: {userId: 12}}
 *
 *       addItem message structure
-*       - content : type, itemId
-*       example {type: "addItem, content: {type: "umlClass", itemId: 7}}
+*       - content : type, itemId, top, left
+*       example {type: "addItem, content: {type: "umlClass", itemId: 7, top: 250, left: 350}}
 *
 *       removeItem message structure
 *       - content : itemId
@@ -154,7 +154,12 @@ Moka.platform = (function(configuration){
     };
     
     var onWebSocketMessage = function(event){
-        processMessage(JSON.parse(event.data));
+        try {
+            processMessage(eval("("+event.data+")"));
+        } catch (syntaxError) {
+            console.log(syntaxError.message);
+            console.log("Not a valid JSON message :" + event.data);
+        }
     };
     
     var onWebSocketError = function(event){
@@ -184,7 +189,7 @@ Moka.platform = (function(configuration){
                 break;
             
             case messageTypes.addItem :
-                addItem(messageContent.type, messageContent.itemId);
+                addItem(messageContent.type, messageContent.itemId, messageContent.top, messageContent.left);
                 break;
 
             case messageTypes.removeItem :
@@ -240,12 +245,13 @@ Moka.platform = (function(configuration){
         }
     };
     
-    var addItem = function(type, id){
+    var addItem = function(type, id, top, left){
         if(getItemById(id) != null) return false;
         var temp = Moka.itemFactory.createItem(type, id);
         if(temp != null){
             itemList.push(temp);
             itemContainer.append(temp.jQueryObject);
+            temp.move(top, left);
         }
         return true;
     };
