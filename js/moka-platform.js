@@ -37,6 +37,11 @@ var Moka = Moka || {};
 *       - content : itemId, top, left   
 *       example {type: "moveItem, content: {itemId: 7, top: 250, left: 433}}
 *
+*
+*       resizeItem message structure
+*       - content : itemId, width, height
+*       example {type : "resizeItem", content: {itemId: 7, width: 120, height: 200}}
+*
 *       selectItem message structure
 *       - content : userId, itemId
 *       example {type: "selectItem", content: {userId: 12, itemId: 7}}
@@ -66,6 +71,7 @@ Moka.platformConfiguration = (function(){
             addItem         :   "addItem",
             removeItem      :   "removeItem",
             moveItem        :   "moveItem",
+            resizeItem      :   "resizeItem"
             selectItem      :   "selectItem",
             unselectItem    :   "unselectItem",
         },
