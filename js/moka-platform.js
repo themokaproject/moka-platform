@@ -432,6 +432,17 @@ Moka.itemFactory = (function(configuration){
             this.jQueryObject.css("top", top+"px");
             this.jQueryObject.css("left", left+"px");
         },
+
+        /*
+        *   Resize the item
+        *
+        *   @Param width
+        *   @Param height
+        */
+        resize : function(width, height){
+            this.jQueryObject.css("width", width+"px");
+            this.jQueryObject.css("height", height+"px");
+        }
         
     };
     
