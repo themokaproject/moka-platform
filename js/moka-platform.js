@@ -71,7 +71,7 @@ Moka.platformConfiguration = (function(){
             addItem         :   "addItem",
             removeItem      :   "removeItem",
             moveItem        :   "moveItem",
-            resizeItem      :   "resizeItem"
+            resizeItem      :   "resizeItem",
             selectItem      :   "selectItem",
             unselectItem    :   "unselectItem",
         },
@@ -206,6 +206,10 @@ Moka.platform = (function(configuration){
                 moveItem(messageContent.itemId, messageContent.top, messageContent.left);
                 break;
 
+            case messageTypes.resizeItem :
+                resizeItem(messageContent.itemId, messageContent.width, messageContent.height);
+                break;
+
             case messageTypes.selectItem :
                 selectItem(messageContent.userId, messageContent.itemId);
                 break;
@@ -284,6 +288,13 @@ Moka.platform = (function(configuration){
             temp.item.move(top, left);
         }
     };
+
+    var resizeItem = function(id, width, height){
+        var temp = getItemById(id);
+        if(temp != null){
+            temp.item.resize(width, height);
+        }
+    }
     
     
     /*
