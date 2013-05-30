@@ -144,6 +144,9 @@
                 platform.processMessage({type: "selectItem", content: {userId: 33, itemId: 15} });
                 platform.processMessage({type: "unselectItem", content: {userId: 33} });
                 platform.processMessage({type: "selectItem", content: {userId: 33, itemId: 12} });
+
+                platform.processMessage({type: "addItem", content: {type: "picture", itemId: 145}});
+                platform.processMessage({type: "moveItem", content: {itemId: 145, top: 450, left: 740} });
                 
         </script>
 

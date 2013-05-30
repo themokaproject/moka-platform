@@ -109,6 +109,10 @@ Moka.itemFactoryConfiguration = (function(){
         umlMethodsClass             :   "umlMethods",
         umlMethodClass              :   "umlMethod",
         umlTitle                    :   "Uml Class",
+        pictureType                 :   "picture", 
+        pictureContentClass         :   "img-fill-div",
+        pictureTitle                :   "Picture",
+        defaultPictureSrc           :   "./images/default_picture.gif",
     };
 })();
 
@@ -567,8 +571,39 @@ Moka.itemFactory = (function(configuration){
         this.attributes.push(attribute);
         this.updateAttributes();
     }
-    
-    
+
+
+    /*
+    *   Uml Class Item Constructor
+    *       extends Item
+    */
+    var PictureItem = function(id){
+        Item.call(this, id);
+        this.url = "";
+    };
+
+    PictureItem.prototype = new Item();
+
+    /*
+    *   Initialize the jQueryObject
+    */
+    PictureItem.prototype.init = function(jQueryObject){
+        if(jQueryObject){
+            this.jQueryObject = jQueryObject;
+        }else{
+            Item.prototype.init.call(this, null);
+            this.getContentObject().append($('<img class="'+configuration.pictureContentClass+'" />'));
+        }        
+    };
+
+    PictureItem.prototype.setSrc = function(src){
+        this.getContentObject().find('.'+configuration.pictureContentClass).attr("src", src);
+    }
+
+    PictureItem.prototype.setAlt = function(alt){
+        this.getContentObject().find('.'+configuration.pictureContentClass).attr("alt", alt);
+    }
+
     
     /*
     *   Create a new post it
@@ -590,6 +625,18 @@ Moka.itemFactory = (function(configuration){
         newUmlClassItem.setTitle(configuration.umlTitle+" "+id);      
         return newUmlClassItem;
     }; 
+
+    /*
+    *   Create a new picture
+    */    
+    var createPicture = function(id){
+        var newPictureItem = new PictureItem(id);
+        newPictureItem.init();
+        newPictureItem.setTitle(configuration.pictureTitle+" "+id);
+        newPictureItem.setAlt(id);
+        newPictureItem.setSrc(configuration.defaultPictureSrc);
+        return newPictureItem;
+    }
     
     
     var createItem = function(type, id) {
@@ -597,6 +644,8 @@ Moka.itemFactory = (function(configuration){
             return createUmlClass(id);
         }else if( type === configuration.postItType){
             return createPostIt(id);
+        }else if(type === configuration.pictureType){
+            return createPicture(id);
         }        
         return null;
     };
