@@ -164,6 +164,10 @@ Moka.platform = (function(configuration){
     var onWebSocketOpen = function(event){
         console.log("open");
         status = "connected";
+        userList = [];
+        itemList = [];
+        userContainer.empty();
+        itemContainer.empty();
         $("#"+configuration.statusCssId).text("Connected");
         $("#"+configuration.iconCssId).attr("src", configuration.cancelIcon);
         $("#"+configuration.iconCssId).removeClass(configuration.rotatingCssClass);
