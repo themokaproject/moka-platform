@@ -144,6 +144,7 @@ Moka.platform = (function(configuration){
     var userContainer = $("#"+configuration.userContainerCssId);
     var itemList = [];
     var itemContainer = $("#"+configuration.itemContainerCssId);
+    var status = "disconnected";
     
     /*
     *   Private Methods
@@ -162,6 +163,7 @@ Moka.platform = (function(configuration){
     
     var onWebSocketOpen = function(event){
         console.log("open");
+        status = "connected";
         $("#"+configuration.statusCssId).text("Connected");
         $("#"+configuration.iconCssId).attr("src", configuration.cancelIcon);
         $("#"+configuration.iconCssId).removeClass(configuration.rotatingCssClass);
@@ -169,6 +171,7 @@ Moka.platform = (function(configuration){
     
     var onWebSocketClose = function(event){
         console.log("close");
+        status = "disconnected";
         $("#"+configuration.statusCssId).text("Disconnected");
         $("#"+configuration.iconCssId).attr("src", configuration.connectionIcon);
         $("#"+configuration.iconCssId).removeClass(configuration.rotatingCssClass);
@@ -318,7 +321,14 @@ Moka.platform = (function(configuration){
     *   MokaPlatform Constructor
     */
     var MokaPlatform = function(){
-
+        var these = this;
+        $("#"+configuration.iconCssId).bind("click", function(){
+            if(status === "disconnected") {                
+                these.run();
+            } else if (status === "connected") {
+                these.close();
+            }
+        });
     };
     
     //public API -- methods
@@ -333,14 +343,25 @@ Moka.platform = (function(configuration){
         },
         
         run : function(){
+            status = "connecting";
             $("#"+configuration.statusCssId).text("Connecting");
             $("#"+configuration.iconCssId).attr("src", configuration.connectionIcon);
             $("#"+configuration.iconCssId).addClass(configuration.rotatingCssClass);
-            webSocket = new WebSocket('ws://'+configuration.host_ip+':'+configuration.port);            
-            webSocket.onopen    = function(event){ onWebSocketOpen(event);      };            
-            webSocket.onclose   = function(event){ onWebSocketClose(event);     };            
-            webSocket.onmessage = function(event){ onWebSocketMessage(event);   };            
-            webSocket.onerror   = function(event){ onWebSocketError(event);     };       
+            
+            //<3 rotation effect, let's spin for at least 1.5sec
+            setTimeout(function(){
+                webSocket = new WebSocket('ws://'+configuration.host_ip+':'+configuration.port);            
+                webSocket.onopen    = function(event){ onWebSocketOpen(event);      };            
+                webSocket.onclose   = function(event){ onWebSocketClose(event);     };            
+                webSocket.onmessage = function(event){ onWebSocketMessage(event);   };            
+                webSocket.onerror   = function(event){ onWebSocketError(event);     }; 
+            }, 1500);
+                  
+        },
+        
+        close : function(){
+            status = "disconnected";
+            webSocket.close();
         },
         
         //TODO remove
