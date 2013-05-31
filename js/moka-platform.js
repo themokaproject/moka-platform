@@ -67,6 +67,7 @@ Moka.platformConfiguration = (function(){
         itemContainerCssId      :   "playground",
         statusCssId             :   "platformTextStatus",
         iconCssId               :   "platformIconAction",
+        saveCssId               :   "platformIconSave",
         cancelIcon              :   "./images/cancel_icon.png",
         connectionIcon          :   "./images/connection_icon.png",
         rotatingCssClass        :   "rotationAnimation",
@@ -79,6 +80,7 @@ Moka.platformConfiguration = (function(){
             resizeItem      :   "resizeItem",
             selectItem      :   "selectItem",
             unselectItem    :   "unselectItem",
+            saveWorkSpace   :   "saveWorkSpace",
         },
         userColors              :   [
             "#FF7C7C",
@@ -203,7 +205,13 @@ Moka.platform = (function(configuration){
         userList.push(newUser);
         userContainer.append(newUser.getUserInfo());
         return true;
-    };  
+    }; 
+
+    var saveWorkSpace = function(workSpace){
+        var data = "data:application/octet-stream,";
+        data+=workSpace;
+        window.open(data);
+    }
     
     var processMessage = function(message){
         var messageContent = message.content;
@@ -242,8 +250,13 @@ Moka.platform = (function(configuration){
                 unselectItem(messageContent.userId);
                 break;
                 
+            case messageTypes.saveWorkSpace :
+                saveWorkSpace(JSON.stringify(messageContent));
+                break;
+                
             default:
                 console.log("unsupported message: " + message);
+                console.log(message);
                 break;
         };
     };
@@ -333,6 +346,16 @@ Moka.platform = (function(configuration){
                 these.close();
             }
         });
+        
+        $("#"+configuration.saveCssId).bind("click", function(){
+            if(status === "connected") {
+                askToSaveWorkSpace();
+            }            
+        });
+    };
+    
+    var askToSaveWorkSpace = function() {
+        webSocket.send("askToSave");
     };
     
     //public API -- methods
