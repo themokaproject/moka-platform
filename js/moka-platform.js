@@ -65,6 +65,11 @@ Moka.platformConfiguration = (function(){
         port                    :   "8887",
         userContainerCssId      :   "userInfoContainer",
         itemContainerCssId      :   "playground",
+        statusCssId             :   "platformTextStatus",
+        iconCssId               :   "platformIconAction",
+        cancelIcon              :   "./images/cancel_icon.png",
+        connectionIcon          :   "./images/connection_icon.png",
+        rotatingCssClass        :   "rotationAnimation",
         messageType             :   {
             addUser         :   "addUser",
             removeUser      :   "removeUser",
@@ -157,10 +162,16 @@ Moka.platform = (function(configuration){
     
     var onWebSocketOpen = function(event){
         console.log("open");
+        $("#"+configuration.statusCssId).text("Connected");
+        $("#"+configuration.iconCssId).attr("src", configuration.cancelIcon);
+        $("#"+configuration.iconCssId).removeClass(configuration.rotatingCssClass);
     };
     
     var onWebSocketClose = function(event){
         console.log("close");
+        $("#"+configuration.statusCssId).text("Disconnected");
+        $("#"+configuration.iconCssId).attr("src", configuration.connectionIcon);
+        $("#"+configuration.iconCssId).removeClass(configuration.rotatingCssClass);
     };
     
     var onWebSocketMessage = function(event){
@@ -176,6 +187,8 @@ Moka.platform = (function(configuration){
         console.log("error");
     }; 
     
+    
+    
     var addUser = function(id, name){
         if(getUserById(id) != null) return false;
         var color = configuration.userColors[userList.length];
@@ -183,7 +196,7 @@ Moka.platform = (function(configuration){
         userList.push(newUser);
         userContainer.append(newUser.getUserInfo());
         return true;
-    }; 
+    };  
     
     var processMessage = function(message){
         var messageContent = message.content;
@@ -320,6 +333,9 @@ Moka.platform = (function(configuration){
         },
         
         run : function(){
+            $("#"+configuration.statusCssId).text("Connecting");
+            $("#"+configuration.iconCssId).attr("src", configuration.connectionIcon);
+            $("#"+configuration.iconCssId).addClass(configuration.rotatingCssClass);
             webSocket = new WebSocket('ws://'+configuration.host_ip+':'+configuration.port);            
             webSocket.onopen    = function(event){ onWebSocketOpen(event);      };            
             webSocket.onclose   = function(event){ onWebSocketClose(event);     };            

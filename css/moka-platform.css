@@ -34,6 +34,55 @@ header{
     padding-left        :   16px;
     padding-right       :   16px;
     padding-bottom      :   10px;
+    position            :   relative;
+}
+
+#headerTitle{
+    float               :   left;
+    margin-top          :   5px;
+}
+
+#toolBar{
+    font-size           :   0.6em;
+    position            :   relative;
+    right               :   0px;
+    text-align          :   right;
+}
+
+#platformTextStatus{
+    display             :   inline-block; 
+    vertical-align      :   middle; 
+}
+
+#platformIconActionContainter{
+    display             :   inline-block; 
+    vertical-align      :   middle;
+}
+
+#platformIconAction{
+    width               :   30px;
+    height              :   30px;
+    cursor              :   pointer;
+}
+
+#platformIconAction:hover{
+    opacity             :   0.7;    
+}
+
+@-webkit-keyframes rotate {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to { 
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+.rotationAnimation{
+    -webkit-animation-name:             rotate; 
+    -webkit-animation-duration:         0.8s; 
+    -webkit-animation-iteration-count:  infinite;
+    -webkit-transition-timing-function: linear;
 }
 
 #wrapper{
