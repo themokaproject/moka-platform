@@ -173,6 +173,7 @@ Moka.platform = (function(configuration){
         $("#"+configuration.statusCssId).text("Connected");
         $("#"+configuration.actionCssId).attr("src", configuration.cancelIcon);
         $("#"+configuration.actionCssId).removeClass(configuration.rotatingCssClass);
+        $('#'+configuration.saveCssId).show();
     };
     
     var onWebSocketClose = function(event){
@@ -181,6 +182,7 @@ Moka.platform = (function(configuration){
         $("#"+configuration.statusCssId).text("Disconnected");
         $("#"+configuration.actionCssId).attr("src", configuration.connectionIcon);
         $("#"+configuration.actionCssId).removeClass(configuration.rotatingCssClass);
+        $('#'+configuration.saveCssId).hide();
     };
     
     var onWebSocketMessage = function(event){
