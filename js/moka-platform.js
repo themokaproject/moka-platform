@@ -253,7 +253,7 @@ Moka.platform = (function(configuration){
                 break;
                 
             case messageTypes.unselectItem :
-                unselectItem(messageContent.userId);
+                unselectItem(messageContent.itemId);
                 break;
                 
             case messageTypes.saveWorkSpace :
@@ -267,10 +267,10 @@ Moka.platform = (function(configuration){
         };
     };
     
-    var unselectItem = function(userId){
-        var userSearch = getUserById(userId);
-        if(userSearch != null){
-            userSearch.user.unselectItem();
+    var unselectItem = function(itemId){
+        var itemSearch = getItemById(itemId);
+        if(itemSearch != null){
+            itemSearch.item.unselect();
         }
     };
     
@@ -278,7 +278,7 @@ Moka.platform = (function(configuration){
         var itemRes = getItemById(itemId);
         var userRes = getUserById(userId);
         if(itemRes != null && userRes != null){
-            userRes.user.selectItem(itemRes.item);
+            itemRes.item.select(userRes.user.color);
         }
     };
     
@@ -496,6 +496,16 @@ Moka.itemFactory = (function(configuration){
                     .append('<div class="'+configuration.itemContentTitleClass+'" />'));
                 this.jQueryObject.append($('<div class="'+configuration.itemContributionsClass+'"/>')); 
             }                   
+        },
+        
+        unselect : function(){
+            this.getContributions().empty();
+        },
+        
+        select : function(color){        
+            var selection = $('<div class="itemContribution"/>');
+            selection.css("background-color", color);
+            this.getContributions().append(selection);                
         },
         
         /*
