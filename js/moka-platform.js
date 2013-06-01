@@ -66,7 +66,7 @@ Moka.platformConfiguration = (function(){
         userContainerCssId      :   "userInfoContainer",
         itemContainerCssId      :   "playground",
         statusCssId             :   "platformTextStatus",
-        iconCssId               :   "platformIconAction",
+        actionCssId             :   "platformIconAction",
         saveCssId               :   "platformIconSave",
         cancelIcon              :   "./images/cancel_icon.png",
         connectionIcon          :   "./images/connection_icon.png",
@@ -171,16 +171,16 @@ Moka.platform = (function(configuration){
         userContainer.empty();
         itemContainer.empty();
         $("#"+configuration.statusCssId).text("Connected");
-        $("#"+configuration.iconCssId).attr("src", configuration.cancelIcon);
-        $("#"+configuration.iconCssId).removeClass(configuration.rotatingCssClass);
+        $("#"+configuration.actionCssId).attr("src", configuration.cancelIcon);
+        $("#"+configuration.actionCssId).removeClass(configuration.rotatingCssClass);
     };
     
     var onWebSocketClose = function(event){
         console.log("close");
         status = "disconnected";
         $("#"+configuration.statusCssId).text("Disconnected");
-        $("#"+configuration.iconCssId).attr("src", configuration.connectionIcon);
-        $("#"+configuration.iconCssId).removeClass(configuration.rotatingCssClass);
+        $("#"+configuration.actionCssId).attr("src", configuration.connectionIcon);
+        $("#"+configuration.actionCssId).removeClass(configuration.rotatingCssClass);
     };
     
     var onWebSocketMessage = function(event){
@@ -339,7 +339,7 @@ Moka.platform = (function(configuration){
     */
     var MokaPlatform = function(){
         var these = this;
-        $("#"+configuration.iconCssId).bind("click", function(){
+        $("#"+configuration.actionCssId).bind("click", function(){
             if(status === "disconnected") {                
                 these.run();
             } else if (status === "connected") {
@@ -372,8 +372,8 @@ Moka.platform = (function(configuration){
         run : function(){
             status = "connecting";
             $("#"+configuration.statusCssId).text("Connecting");
-            $("#"+configuration.iconCssId).attr("src", configuration.connectionIcon);
-            $("#"+configuration.iconCssId).addClass(configuration.rotatingCssClass);
+            $("#"+configuration.actionCssId).attr("src", configuration.connectionIcon);
+            $("#"+configuration.actionCssId).addClass(configuration.rotatingCssClass);
             
             //<3 rotation effect, let's spin for at least 1.5sec
             setTimeout(function(){
