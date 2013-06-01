@@ -72,6 +72,11 @@ Moka.platformConfiguration = (function(){
         settingBoxCssId         :   "settingBox",
         hostIpInputCssId        :   "platformHostIp",
         portInputCssId          :   "platformPort",
+        dragZoneCssId           :   "dragZone",
+        dropZoneCssId           :   "dropZone",
+        overlayCssId            :   "fullScreenOverlay", 
+        lightBoxContainerCssId  :   "lightBoxContainer",
+        lightBoxMessageCssId    :   "lightBoxMessage",
         cancelIcon              :   "./images/cancel_icon.png",
         connectionIcon          :   "./images/connection_icon.png",
         rotatingCssClass        :   "rotationAnimation",
@@ -337,6 +342,58 @@ Moka.platform = (function(configuration){
         if(temp != null){
             temp.item.resize(width, height);
         }
+    };
+    
+    var dragEnterHandler = function(event) {
+        event.stopPropagation();
+        event.preventDefault();
+        $("#"+configuration.dropZoneCssId).show();
+        $("#"+configuration.overlayCssId).show();
+        $("#"+configuration.lightBoxContainerCssId).css("display", "table");
+        if(status == "connected") {        
+            $("#"+configuration.overlayCssId).css("background-color", "#B7DB4C");
+            $("#"+configuration.lightBoxMessageCssId).text("Drop a file to load a project");
+        } else {
+            $("#"+configuration.overlayCssId).css("background-color", "#FF7C7C");
+            $("#"+configuration.lightBoxMessageCssId).text("Connect the platform before loading a project");
+        }
+    };
+    
+    var dragOverHandler = function(event) {
+        event.stopPropagation();
+        event.preventDefault();
+    }
+    
+    var dragLeaveHandler = function(event) {
+        event.stopPropagation();
+        event.preventDefault();
+        $("#"+configuration.dropZoneCssId).hide();
+        $("#"+configuration.overlayCssId).hide();
+        $("#"+configuration.lightBoxContainerCssId).hide();
+    };
+    
+    var dropHandler = function(event) {
+        event.stopPropagation();
+        event.preventDefault();
+        $("#"+configuration.dropZoneCssId).hide();
+        $("#"+configuration.overlayCssId).hide();
+        $("#"+configuration.lightBoxContainerCssId).hide();
+        if(status != "connected") return;
+
+        
+        var files = event.originalEvent.dataTransfer.files;
+        var count = files.length;
+        
+        if(count >0) {
+            var file = files[0];
+            var reader = new FileReader();
+            reader.onload = uploadProject;
+            reader.readAsText(file);            
+        }
+    }
+    
+    var uploadProject = function(event) {
+        console.log(event.target.result);
     }
     
     
@@ -373,6 +430,11 @@ Moka.platform = (function(configuration){
         
         $("#"+configuration.hostIpInputCssId).val(configuration.hostIp);
         $("#"+configuration.portInputCssId).val(configuration.port);
+        
+        $("#"+configuration.dragZoneCssId).bind("dragenter", dragEnterHandler);
+        $("#"+configuration.dropZoneCssId).bind("dragleave", dragLeaveHandler);
+        $("#"+configuration.dropZoneCssId).bind("dragover", dragOverHandler);
+        $("#"+configuration.dropZoneCssId).bind("drop", dropHandler);
     };
     
     var askToSaveWorkSpace = function() {
