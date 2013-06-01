@@ -61,13 +61,17 @@ var Moka = Moka || {};
 Moka.platformConfiguration = (function(){
     "use strict";
     return {
-        host_ip                 :   "localhost",
+        hostIp                 :   "localhost",
         port                    :   "8887",
         userContainerCssId      :   "userInfoContainer",
         itemContainerCssId      :   "playground",
         statusCssId             :   "platformTextStatus",
         actionCssId             :   "platformIconAction",
         saveCssId               :   "platformIconSave",
+        settingCssId            :   "platformIconSetting",
+        settingBoxCssId         :   "settingBox",
+        hostIpInputCssId        :   "platformHostIp",
+        portInputCssId          :   "platformPort",
         cancelIcon              :   "./images/cancel_icon.png",
         connectionIcon          :   "./images/connection_icon.png",
         rotatingCssClass        :   "rotationAnimation",
@@ -354,6 +358,21 @@ Moka.platform = (function(configuration){
                 askToSaveWorkSpace();
             }            
         });
+        
+        $("#"+configuration.settingCssId).bind("click", function(){
+           $("#"+configuration.settingBoxCssId).toggle();
+        });
+        
+        $("#"+configuration.hostIpInputCssId).bind("keyup", function(){
+            these.setHostIp($("#"+configuration.hostIpInputCssId).val());
+        });
+        
+        $("#"+configuration.portInputCssId).bind("keyup", function(){
+            these.setPort($("#"+configuration.portInputCssId).val());
+        });
+        
+        $("#"+configuration.hostIpInputCssId).val(configuration.hostIp);
+        $("#"+configuration.portInputCssId).val(configuration.port);
     };
     
     var askToSaveWorkSpace = function() {
@@ -364,7 +383,7 @@ Moka.platform = (function(configuration){
     MokaPlatform.prototype = {      
         
         setHostIp : function(ip){
-            configuration.host_ip = ip;
+            configuration.hostIp = ip;
         },
         
         setPort : function(port){
@@ -379,7 +398,7 @@ Moka.platform = (function(configuration){
             
             //<3 rotation effect, let's spin for at least 1.5sec
             setTimeout(function(){
-                webSocket = new WebSocket('ws://'+configuration.host_ip+':'+configuration.port);            
+                webSocket = new WebSocket('ws://'+configuration.hostIp+':'+configuration.port);            
                 webSocket.onopen    = function(event){ onWebSocketOpen(event);      };            
                 webSocket.onclose   = function(event){ onWebSocketClose(event);     };            
                 webSocket.onmessage = function(event){ onWebSocketMessage(event);   };            
