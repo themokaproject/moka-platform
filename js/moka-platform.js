@@ -394,7 +394,9 @@ Moka.platform = (function(configuration){
     
     var uploadProject = function(event) {
         console.log(event.target.result);
-        webSocket.send(JSON.stringify({type:"upload", content : event.target.result }));
+        itemList = [];
+        itemContainer.empty();
+        webSocket.send(JSON.stringify({type:"upload", content : event.target.result }));        
     }
     
     
