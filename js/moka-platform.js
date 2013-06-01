@@ -394,6 +394,7 @@ Moka.platform = (function(configuration){
     
     var uploadProject = function(event) {
         console.log(event.target.result);
+        webSocket.send(JSON.stringify({type:"upload", content : event.target.result }));
     }
     
     
@@ -438,7 +439,7 @@ Moka.platform = (function(configuration){
     };
     
     var askToSaveWorkSpace = function() {
-        webSocket.send("askToSave");
+        webSocket.send(JSON.stringify({type:"backUp", content : "" }));
     };
     
     //public API -- methods
