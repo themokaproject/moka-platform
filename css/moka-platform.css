@@ -37,6 +37,17 @@ header{
     position            :   relative;
 }
 
+#fullScreenOverlay{
+    position            :   absolute;
+    left                :   0px;
+    top                 :   0px;
+    width               :   100%;
+    height              :   100%;
+    opacity             :   0.3;
+    z-index             :   1000;
+    display             :   none;
+}
+
 #headerTitle{
     float               :   left;
     margin-top          :   5px;
