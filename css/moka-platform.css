@@ -83,7 +83,9 @@ header{
     margin-left         :   -260px;
     border              :   1px solid #ccc;
     padding             :   18px;
-    text-align          :   left; 
+    text-align          :   left;
+    -webkit-box-shadow  :  1px 1px 1px 1px #ccc;       
+    box-shadow          :  1px 1px 1px 1px #ccc;    
     display             :   none;
 }
 
