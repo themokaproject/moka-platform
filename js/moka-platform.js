@@ -270,7 +270,7 @@ Moka.platform = (function(configuration){
     var unselectItem = function(itemId){
         var itemSearch = getItemById(itemId);
         if(itemSearch != null){
-            itemSearch.item.unselect();
+            itemSearch.item.unLock();
         }
     };
     
@@ -278,7 +278,7 @@ Moka.platform = (function(configuration){
         var itemRes = getItemById(itemId);
         var userRes = getUserById(userId);
         if(itemRes != null && userRes != null){
-            itemRes.item.select(userRes.user.color);
+            itemRes.item.lock(userRes.user.color);
         }
     };
     
@@ -439,27 +439,11 @@ Moka.User = (function(configuration){
     var User = function(id, name, color){
         this.color = color;
         var userInfo = initUserInfo(id, name, color);
-        this.selection = null;
         this.getId = function(){ return id; }; 
         this.getName = function(){ return name; };
         this.getUserInfo = function(){ return userInfo; };
     };  
     
-    User.prototype = {
-    
-        selectItem : function(item){
-            if(this.selection === null){
-                this.selection = $('<div class="itemContribution"/>');
-                this.selection.css("background-color", this.color);
-                item.getContributions().append(this.selection);
-            }            
-        },
-        
-        unselectItem : function(){
-            this.selection.remove();
-            this.selection = null;
-        },
-    };
     
     return User;    
 })(Moka.userConfiguration);
@@ -498,11 +482,11 @@ Moka.itemFactory = (function(configuration){
             }                   
         },
         
-        unselect : function(){
+        unLock : function(){
             this.getContributions().empty();
         },
         
-        select : function(color){        
+        lock : function(color){        
             var selection = $('<div class="itemContribution"/>');
             selection.css("background-color", color);
             this.getContributions().append(selection);                
