@@ -70,7 +70,7 @@ header{
 }
 
 
-.platformIconContainer:hover{
+.platformIcon:hover{
     opacity             :   0.4;    
 }
 
@@ -94,6 +94,7 @@ header{
 
 #settingTable td{
     vertical-align      :   middle;
+    text-align          :   center;
 }
 
 
