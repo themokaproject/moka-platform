@@ -54,7 +54,7 @@ header{
     vertical-align      :   middle; 
 }
 
-.platformIconContainter{
+.platformIconContainer{
     display             :   inline-block; 
     vertical-align      :   middle;
     width               :   35px;
