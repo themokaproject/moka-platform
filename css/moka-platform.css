@@ -38,14 +38,35 @@ header{
 }
 
 #fullScreenOverlay{
+    display             :   none;
     position            :   absolute;
     left                :   0px;
     top                 :   0px;
     width               :   100%;
     height              :   100%;
     opacity             :   0.3;
-    z-index             :   1000;
+    z-index             :   1000;   
+}
+
+#lightBoxContainer{
     display             :   none;
+    position            :   absolute;
+    left                :   0px;
+    top                 :   0px;
+    width               :   100%;
+    height              :   100%;
+    z-index             :   10000;    
+}
+
+#lightBox{
+    display             :   table-cell;
+    vertical-align      :   middle;
+    text-align          :   center;
+}
+
+#lightBoxMessage{
+    font-size           :   3em;
+    color               :   #444;
 }
 
 #headerTitle{
