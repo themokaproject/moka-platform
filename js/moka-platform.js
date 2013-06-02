@@ -26,8 +26,8 @@ var Moka = Moka || {};
 *       example {type: "removeUser, content: {userId: 12}}
 *
 *       addItem message structure
-*       - content : type, itemId, top, left
-*       example {type: "addItem, content: {type: "umlClass", itemId: 7, top: 250, left: 350}}
+*       - content : type, itemId, top, left, width, height
+*       example {type: "addItem, content: {type: "umlClass", itemId: 7, top: 250, left: 350, width: 200, height: 300}}
 *
 *       removeItem message structure
 *       - content : itemId
@@ -244,7 +244,7 @@ Moka.platform = (function(configuration){
                 break;
             
             case messageTypes.addItem :
-                addItem(messageContent.type, messageContent.itemId, messageContent.top, messageContent.left);
+                addItem(messageContent.type, messageContent.itemId, messageContent.top, messageContent.left, messageContent.width, messageContent.height);
                 break;
 
             case messageTypes.removeItem :
@@ -309,13 +309,14 @@ Moka.platform = (function(configuration){
         }
     };
     
-    var addItem = function(type, id, top, left){
+    var addItem = function(type, id, top, left, width, height){
         if(getItemById(id) != null) return false;
         var temp = Moka.itemFactory.createItem(type, id);
         if(temp != null){
             itemList.push(temp);
             itemContainer.append(temp.jQueryObject);
             temp.move(top, left);
+            temp.resize(width, height);
         }
         return true;
     };
