@@ -223,7 +223,6 @@ Moka.platform = (function(configuration){
     }; 
 
     var saveWorkSpace = function(workSpace){
-        console.log("test");
         $("#"+configuration.settingBoxCssId).hide();
         $("#"+configuration.saveBoxCssId).show();
         var textFileAsBlob = new Blob([workSpace], {type:'text/plain'});
@@ -455,7 +454,7 @@ Moka.platform = (function(configuration){
         $("#"+configuration.dropZoneCssId).bind("drop", dropHandler);
     };
     
-    var askToSaveWorkSpace = function() {        console.log("test");
+    var askToSaveWorkSpace = function() {
         webSocket.send(JSON.stringify({type:"backUp", content : "" }));
     };
     
