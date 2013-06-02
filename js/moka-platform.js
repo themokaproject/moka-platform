@@ -68,6 +68,9 @@ Moka.platformConfiguration = (function(){
         statusCssId             :   "platformTextStatus",
         actionCssId             :   "platformIconAction",
         saveCssId               :   "platformIconSave",
+        saveBoxCssId            :   "saveInfoBox",
+        saveActionCssId         :   "backUpAction",
+        saveInputFileNameCssId  :   "backUpFileName",
         settingCssId            :   "platformIconSetting",
         settingBoxCssId         :   "settingBox",
         hostIpInputCssId        :   "platformHostIp",
@@ -192,6 +195,7 @@ Moka.platform = (function(configuration){
         $("#"+configuration.actionCssId).attr("src", configuration.connectionIcon);
         $("#"+configuration.actionCssId).removeClass(configuration.rotatingCssClass);
         $('#'+configuration.saveCssId).hide();
+        $("#"+configuration.saveBoxCssId).hide();
     };
     
     var onWebSocketMessage = function(event){
@@ -219,9 +223,11 @@ Moka.platform = (function(configuration){
     }; 
 
     var saveWorkSpace = function(workSpace){
-        var data = "data:application/octet-stream,";
-        data+=workSpace;
-        window.open(data);
+        console.log("test");
+        $("#"+configuration.settingBoxCssId).hide();
+        $("#"+configuration.saveBoxCssId).show();
+        var textFileAsBlob = new Blob([workSpace], {type:'text/plain'});
+        $("#"+configuration.saveActionCssId).attr("href", window.webkitURL.createObjectURL(textFileAsBlob));     
     }
     
     var processMessage = function(message){
@@ -415,12 +421,21 @@ Moka.platform = (function(configuration){
         
         $("#"+configuration.saveCssId).bind("click", function(){
             if(status === "connected") {
-                askToSaveWorkSpace();
+                if($("#"+configuration.saveBoxCssId).is(":visible")){
+                    $("#"+configuration.saveBoxCssId).hide();
+                }else{                    
+                    askToSaveWorkSpace();
+                }
             }            
         });
         
+        $("#"+configuration.saveInputFileNameCssId).bind("keyup", function(){
+            $("#"+configuration.saveActionCssId).attr("download", $("#"+configuration.saveInputFileNameCssId).val());
+        });                
+        
         $("#"+configuration.settingCssId).bind("click", function(){
            $("#"+configuration.settingBoxCssId).toggle();
+           $("#"+configuration.saveBoxCssId).hide();
         });
         
         $("#"+configuration.hostIpInputCssId).bind("keyup", function(){
@@ -440,7 +455,7 @@ Moka.platform = (function(configuration){
         $("#"+configuration.dropZoneCssId).bind("drop", dropHandler);
     };
     
-    var askToSaveWorkSpace = function() {
+    var askToSaveWorkSpace = function() {        console.log("test");
         webSocket.send(JSON.stringify({type:"backUp", content : "" }));
     };
     

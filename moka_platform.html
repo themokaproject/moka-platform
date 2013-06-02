@@ -27,11 +27,28 @@
                     </div>
                     <div class="platformIconContainer">
                         <img id="platformIconSave" class="img-fill-div platformIcon" src="./images/save_icon.png">
+                        <div id="saveInfoBox" class="toolBarBox">
+                            <table id="saveInfoTable" class="toolBarBoxTable">
+                                <tr>
+                                    <td>
+                                        <label for="fileName">File Name</label>
+                                    </td>
+                                    <td>
+                                        <input id="backUpFileName" name="fileName" value="mokaProject.txt">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <a id="backUpAction" download="mokaProject.txt" href="#"><input type="submit" name="backUpAction" value="Save Project"></input></a>
+                                    </td>
+                                </tr>
+                            </table>                                                           
+                        </div>
                     </div> 
                     <div class="platformIconContainer">
                         <img id="platformIconSetting" class="img-fill-div platformIcon" src="./images/setting_icon.png">
-                        <div id="settingBox">
-                            <table id="settingTable">
+                        <div id="settingBox" class="toolBarBox">
+                            <table id="settingTable" class="toolBarBoxTable">
                                 <tr>
                                     <td>
                                         <label for="hostIp">Host Ip</label>
