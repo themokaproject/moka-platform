@@ -245,7 +245,6 @@ Moka.platform = (function(configuration){
             
             case messageTypes.addItem :
                 addItem(messageContent.type, messageContent.itemId, messageContent.top, messageContent.left, messageContent.width, messageContent.height, messageContent.title);
-                console.log(messageContent.title);
                 break;
 
             case messageTypes.removeItem :
