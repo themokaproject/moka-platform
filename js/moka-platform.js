@@ -131,6 +131,7 @@ Moka.itemFactoryConfiguration = (function(){
         pictureType                 :   "image", 
         pictureContentClass         :   "img-fill-div",
         pictureTitle                :   "Picture",
+        pictureContainerClass       :   "pictureContainer",
         defaultPictureSrc           :   "./images/default_picture.gif",
     };
 })();
@@ -750,7 +751,9 @@ Moka.itemFactory = (function(configuration){
             this.jQueryObject = jQueryObject;
         }else{
             Item.prototype.init.call(this, null);
-            this.getContentObject().append($('<img class="'+configuration.pictureContentClass+'" />'));
+            this.getContentObject().append(
+                $('<div class="'+configuration.pictureContainerClass+'"/>').append(
+                    $('<img class="'+configuration.pictureContentClass+'" />')));
         }        
     };
 
