@@ -101,6 +101,7 @@ header{
 }
 
 .platformIconContainer{
+    position            :   relative;
     display             :   inline-block; 
     vertical-align      :   middle;
     width               :   35px;
@@ -119,12 +120,15 @@ header{
 .platformIcon:hover{
     opacity             :   0.4; 
     -webkit-animation   :   bounce 0.4s 1 ease-in; 
+    -moz-animation      :   bounce 0.4s 1 ease-in; 
+    -o-animation        :   bounce 0.4s 1 ease-in; 
+    animation           :   bounce 0.4s 1 ease-in; 
 }
 
 
 .toolBarBox{
-    position            :   relative;
-    bottom              :   5px;
+    position            :   absolute;
+    top                 :   35px;
     left                :   0px;
     width               :   280px;
     background-color    :   #F9F9F9;
@@ -150,7 +154,10 @@ header{
 
 
 .rotationAnimation{
-    -webkit-animation : rotate 0.8s infinite ease-out;
+    -webkit-animation   :   rotate 0.8s infinite ease-out;
+    -moz-animation      :   rotate 0.8s infinite ease-out;
+    -o-animation        :   rotate 0.8s infinite ease-out;
+    animation           :   rotate 0.8s infinite ease-out;    
 }
 
 
