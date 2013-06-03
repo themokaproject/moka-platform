@@ -117,7 +117,8 @@ header{
 
 
 .platformIcon:hover{
-    opacity             :   0.4;    
+    opacity             :   0.4; 
+    -webkit-animation   :   bounce 0.4s 1 ease-in; 
 }
 
 
@@ -161,6 +162,15 @@ header{
     -webkit-animation-duration:         0.8s; 
     -webkit-animation-iteration-count:  infinite;
     -webkit-transition-timing-function: linear;
+}
+
+@-webkit-keyframes bounce {
+  0%, 100%{
+    margin-top: 0px;
+  }
+  50% { 
+    margin-top:  -6px;
+  }
 }
 
 #wrapper{
