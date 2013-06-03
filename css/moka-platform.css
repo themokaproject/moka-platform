@@ -219,7 +219,7 @@ header{
     padding             :   10px;
     position            :   absolute;
     top                 :   0;
-    bottom              :   0;
+    bottom              :   15px;
     left                :   0;
     right               :   0;    
 }
@@ -231,7 +231,6 @@ header{
 }
 
 .itemContributions{    
-    width               :   100%;  
     text-align          :   right;
     position            :   absolute;
     bottom              :   -5px;
@@ -240,8 +239,8 @@ header{
 }
 
 .itemContribution{
-    width               :   40px;
-    height              :   7px;
+    width               :   50px;
+    height              :   15px;
     display             :   inline-block;
 }
 
