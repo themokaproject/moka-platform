@@ -150,10 +150,7 @@ header{
 
 
 .rotationAnimation{
-    -webkit-animation-name:             rotate; 
-    -webkit-animation-duration:         0.8s; 
-    -webkit-animation-iteration-count:  infinite;
-    -webkit-transition-timing-function: linear;
+    -webkit-animation : rotate 0.8s infinite ease-out;
 }
 
 
