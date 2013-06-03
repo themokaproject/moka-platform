@@ -71,6 +71,8 @@ Moka.platformConfiguration = (function(){
         saveBoxCssId            :   "saveInfoBox",
         saveActionCssId         :   "backUpAction",
         saveInputFileNameCssId  :   "backUpFileName",
+        uploadCssId             :   "platformIconUpload",
+        uploadBoxCssId          :   "uploadBox",
         settingCssId            :   "platformIconSetting",
         settingBoxCssId         :   "settingBox",
         hostIpInputCssId        :   "platformHostIp",
@@ -187,6 +189,7 @@ Moka.platform = (function(configuration){
         $("#"+configuration.actionCssId).attr("src", configuration.cancelIcon);
         $("#"+configuration.actionCssId).removeClass(configuration.rotatingCssClass);
         $('#'+configuration.saveCssId).show();
+        $('#'+configuration.uploadCssId).show();
     };
     
     var onWebSocketClose = function(event){
@@ -197,6 +200,8 @@ Moka.platform = (function(configuration){
         $("#"+configuration.actionCssId).removeClass(configuration.rotatingCssClass);
         $('#'+configuration.saveCssId).hide();
         $("#"+configuration.saveBoxCssId).hide();
+        $('#'+configuration.uploadCssId).hide();
+        $("#"+configuration.uploadBoxCssId).hide();
     };
     
     var onWebSocketMessage = function(event){
@@ -225,6 +230,7 @@ Moka.platform = (function(configuration){
 
     var saveWorkSpace = function(workSpace){
         $("#"+configuration.settingBoxCssId).hide();
+        $("#"+configuration.uploadBoxCssId).hide();
         $("#"+configuration.saveBoxCssId).show();
         var textFileAsBlob = new Blob([workSpace], {type:'text/plain'});
         $("#"+configuration.saveActionCssId).attr("href", window.webkitURL.createObjectURL(textFileAsBlob));     
@@ -438,6 +444,13 @@ Moka.platform = (function(configuration){
         $("#"+configuration.settingCssId).bind("click", function(){
            $("#"+configuration.settingBoxCssId).toggle();
            $("#"+configuration.saveBoxCssId).hide();
+           $("#"+configuration.uploadBoxCssId).hide();
+        });
+        
+        $("#"+configuration.uploadCssId).bind("click", function(){
+           $("#"+configuration.settingBoxCssId).hide();
+           $("#"+configuration.saveBoxCssId).hide();
+           $("#"+configuration.uploadBoxCssId).toggle();
         });
         
         $("#"+configuration.hostIpInputCssId).bind("keyup", function(){

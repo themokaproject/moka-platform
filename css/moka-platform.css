@@ -116,6 +116,10 @@ header{
     display             :   none;
 }
 
+#platformIconUpload{
+    display             :   none;
+}
+
 
 .platformIcon:hover{
     opacity             :   0.4; 
@@ -151,16 +155,12 @@ header{
     text-align          :   center;
 }
 
-
-
 .rotationAnimation{
     -webkit-animation   :   rotate 0.8s infinite ease-out;
     -moz-animation      :   rotate 0.8s infinite ease-out;
     -o-animation        :   rotate 0.8s infinite ease-out;
     animation           :   rotate 0.8s infinite ease-out;    
 }
-
-
 
 #wrapper{
     position            :   relative;    
@@ -296,7 +296,7 @@ header{
     margin-top: 0px;
   }
   50% { 
-    margin-top:  -6px;
+    margin-top:  -7px;
   }
 }
 
