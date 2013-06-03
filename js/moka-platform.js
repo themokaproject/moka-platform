@@ -73,6 +73,8 @@ Moka.platformConfiguration = (function(){
         saveInputFileNameCssId  :   "backUpFileName",
         uploadCssId             :   "platformIconUpload",
         uploadBoxCssId          :   "uploadBox",
+        aboutCssId              :   "platformIconAbout",
+        aboutBoxCssId           :   "aboutBox",
         settingCssId            :   "platformIconSetting",
         settingBoxCssId         :   "settingBox",
         hostIpInputCssId        :   "platformHostIp",
@@ -231,6 +233,7 @@ Moka.platform = (function(configuration){
     var saveWorkSpace = function(workSpace){
         $("#"+configuration.settingBoxCssId).hide();
         $("#"+configuration.uploadBoxCssId).hide();
+        $("#"+configuration.aboutBoxCssId).hide();
         $("#"+configuration.saveBoxCssId).show();
         var textFileAsBlob = new Blob([workSpace], {type:'text/plain'});
         $("#"+configuration.saveActionCssId).attr("href", window.webkitURL.createObjectURL(textFileAsBlob));     
@@ -445,12 +448,21 @@ Moka.platform = (function(configuration){
            $("#"+configuration.settingBoxCssId).toggle();
            $("#"+configuration.saveBoxCssId).hide();
            $("#"+configuration.uploadBoxCssId).hide();
+           $("#"+configuration.aboutBoxCssId).hide();
         });
         
         $("#"+configuration.uploadCssId).bind("click", function(){
            $("#"+configuration.settingBoxCssId).hide();
            $("#"+configuration.saveBoxCssId).hide();
            $("#"+configuration.uploadBoxCssId).toggle();
+           $("#"+configuration.aboutBoxCssId).hide();
+        });
+        
+         $("#"+configuration.aboutCssId).bind("click", function(){
+           $("#"+configuration.settingBoxCssId).hide();
+           $("#"+configuration.saveBoxCssId).hide();
+           $("#"+configuration.uploadBoxCssId).hide();
+           $("#"+configuration.aboutBoxCssId).toggle();
         });
         
         $("#"+configuration.hostIpInputCssId).bind("keyup", function(){
