@@ -148,14 +148,6 @@ header{
 }
 
 
-@-webkit-keyframes rotate {
-  from {
-    -webkit-transform: rotate(0deg);
-  }
-  to { 
-    -webkit-transform: rotate(360deg);
-  }
-}
 
 .rotationAnimation{
     -webkit-animation-name:             rotate; 
@@ -164,14 +156,7 @@ header{
     -webkit-transition-timing-function: linear;
 }
 
-@-webkit-keyframes bounce {
-  0%, 100%{
-    margin-top: 0px;
-  }
-  50% { 
-    margin-top:  -6px;
-  }
-}
+
 
 #wrapper{
     position            :   relative;    
@@ -298,6 +283,28 @@ header{
 .umlMethod{
     font-size           :   0.9em;
 }
+
+/*
+*   Animations
+*/
+@-webkit-keyframes bounce {
+  0%, 100%{
+    margin-top: 0px;
+  }
+  50% { 
+    margin-top:  -6px;
+  }
+}
+
+@-webkit-keyframes rotate {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to { 
+    -webkit-transform: rotate(360deg);
+  }
+}
+
 
 /*
 *   main background colors
