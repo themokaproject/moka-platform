@@ -27,7 +27,7 @@ var Moka = Moka || {};
 *
 *       addItem message structure
 *       - content : type, itemId, top, left, width, height, title
-*       example {type: "addItem, content: {type: "umlClass", itemId: 7, top: 250, left: 350, width: 200, height: 300, title: "myItem_2"}}
+*       example {type: "addItem, content: {type: "umlClass", itemId: 7, top: 250, left: 350, width: 200, height: 300, title: "myItem_2", rotateZ}}
 *
 *       removeItem message structure
 *       - content : itemId
@@ -37,6 +37,9 @@ var Moka = Moka || {};
 *       - content : itemId, top, left   
 *       example {type: "moveItem, content: {itemId: 7, top: 250, left: 433}}
 *
+*       rotateItem message structure
+*       - content : itemId, rotateX, rotateY, rotateZ
+*       example {type : "rotateItem", content: {itemId: 7, rotateX: 120, rotateY: 200, rotateZ:200}}
 *
 *       resizeItem message structure
 *       - content : itemId, width, height
@@ -254,7 +257,8 @@ Moka.platform = (function(configuration){
                 break;
             
             case messageTypes.addItem :
-                addItem(messageContent.type, messageContent.itemId, messageContent.top, messageContent.left, messageContent.width, messageContent.height, messageContent.title);
+                addItem(messageContent.type, messageContent.itemId, messageContent.top, messageContent.left, 
+                    messageContent.width, messageContent.height, messageContent.title, messageContent.rotateZ);
                 break;
 
             case messageTypes.removeItem :
@@ -323,7 +327,7 @@ Moka.platform = (function(configuration){
         }
     };
     
-    var addItem = function(type, id, top, left, width, height, title){
+    var addItem = function(type, id, top, left, width, height, title, rotateZ){
         if(getItemById(id) != null) return false;
         var temp = Moka.itemFactory.createItem(type, id);
         if(temp != null){
@@ -332,6 +336,7 @@ Moka.platform = (function(configuration){
             temp.move(top, left);
             temp.resize(width, height);
             temp.setTitle(title);
+            temp.rotate(0,0,rotateZ);
         }
         return true;
     };
