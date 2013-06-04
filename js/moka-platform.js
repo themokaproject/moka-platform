@@ -97,6 +97,7 @@ Moka.platformConfiguration = (function(){
             selectItem      :   "selectItem",
             unselectItem    :   "unselectItem",
             saveWorkSpace   :   "saveWorkSpace",
+            rotateItem      :   "rotateItem",
         },
         userColors              :   [
             "#FF7C7C",
@@ -280,6 +281,10 @@ Moka.platform = (function(configuration){
                 saveWorkSpace(JSON.stringify(messageContent));
                 break;
                 
+            case messageTypes.rotateItem :
+                rotateItem(messageContent.itemId, messageContent.rotateX, messageContent.rotateY, messageContent.rotateZ);
+                break;
+                
             default:
                 console.log("unsupported message: " + message);
                 console.log(message);
@@ -358,6 +363,13 @@ Moka.platform = (function(configuration){
         var temp = getItemById(id);
         if(temp != null){
             temp.item.resize(width, height);
+        }
+    };
+    
+    var rotateItem = function(id, rotateX, rotateY, rotateZ){
+        var temp = getItemById(id);
+        if(temp != null){
+            temp.item.rotate(rotateX, rotateY, rotateZ);
         }
     };
     
@@ -649,7 +661,19 @@ Moka.itemFactory = (function(configuration){
         resize : function(width, height){
             this.jQueryObject.css("width", width+"px");
             this.jQueryObject.css("height", height+"px");
+        },
+        
+        /*
+        *   Rotate the item
+        *
+        *   @Param rotateX
+        *   @Param rotateY
+        *   @Param rotateZ
+        */
+        rotate : function(rotateX, rotateY, rotateZ){
+            this.jQueryObject.css("-webkit-transform", "rotateZ("+rotateZ+"deg)");
         }
+
         
     };
     
