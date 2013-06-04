@@ -258,7 +258,7 @@ Moka.platform = (function(configuration){
             
             case messageTypes.addItem :
                 addItem(messageContent.type, messageContent.itemId, messageContent.top, messageContent.left, 
-                    messageContent.width, messageContent.height, messageContent.title, messageContent.rotateZ);
+                    messageContent.width, messageContent.height, messageContent.title, messageContent.rotateX, messageContent.rotateY, messageContent.rotateZ);
                 break;
 
             case messageTypes.removeItem :
@@ -327,7 +327,7 @@ Moka.platform = (function(configuration){
         }
     };
     
-    var addItem = function(type, id, top, left, width, height, title, rotateZ){
+    var addItem = function(type, id, top, left, width, height, title, rotateX, rotateY, rotateZ){
         if(getItemById(id) != null) return false;
         var temp = Moka.itemFactory.createItem(type, id);
         if(temp != null){
@@ -336,7 +336,7 @@ Moka.platform = (function(configuration){
             temp.move(top, left);
             temp.resize(width, height);
             temp.setTitle(title);
-            temp.rotate(0,0,rotateZ);
+            temp.rotate(rotateX,rotateY,rotateZ);
         }
         return true;
     };
@@ -371,7 +371,7 @@ Moka.platform = (function(configuration){
         }
     };
     
-    var rotateItem = function(id, rotateX, rotateY, rotateZ){
+    var rotateItem = function(id, rotateX, rotateY, rotateZ){      
         var temp = getItemById(id);
         if(temp != null){
             temp.item.rotate(rotateX, rotateY, rotateZ);
@@ -676,7 +676,7 @@ Moka.itemFactory = (function(configuration){
         *   @Param rotateZ
         */
         rotate : function(rotateX, rotateY, rotateZ){
-            this.jQueryObject.css("-webkit-transform", "rotateZ("+rotateZ+"deg)");
+            this.jQueryObject.css("-webkit-transform", "perspective(300) rotateX("+rotateX+"deg) " + "rotateY("+rotateY+"deg) " +"rotateZ("+rotateZ+"deg)");
         }
 
         
