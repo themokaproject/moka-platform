@@ -53,6 +53,10 @@ var Moka = Moka || {};
 *       - content : userId
 *       example {type: "unselectItem", content: {userId: 12}}
 *
+*       editItem message structure
+*       - content : itemId, field, content
+*       example {type: "unselectItem", content: {itemId: 12, field: "title", content: "my New Title"}}
+*
 *
 *
 ****************************************************************************
@@ -101,6 +105,7 @@ Moka.platformConfiguration = (function(){
             unselectItem    :   "unselectItem",
             saveWorkSpace   :   "saveWorkSpace",
             rotateItem      :   "rotateItem",
+            editItem        :   "editItem",
         },
         userColors              :   [
             "#FF7C7C",
@@ -141,6 +146,10 @@ Moka.itemFactoryConfiguration = (function(){
         pictureTitle                :   "Picture",
         pictureContainerClass       :   "pictureContainer",
         defaultPictureSrc           :   "./images/default_picture.gif",
+        field                       :   {
+                title       :   "title",
+                imageSrc    :   "url",
+        },
     };
 })();
 
@@ -289,11 +298,21 @@ Moka.platform = (function(configuration){
                 rotateItem(messageContent.itemId, messageContent.rotateX, messageContent.rotateY, messageContent.rotateZ);
                 break;
                 
+            case messageTypes.editItem :
+                editItem(messageContent.itemId, messageContent.field, messageContent.content);
+                
             default:
                 console.log("unsupported message: " + message);
                 console.log(message);
                 break;
         };
+    };
+    
+    var editItem = function(itemId, field, content){
+        var itemSearch = getItemById(itemId);
+        if(itemSearch != null){
+            itemSearch.item.edit(field, content);
+        }
     };
     
     var unselectItem = function(itemId){
@@ -677,7 +696,19 @@ Moka.itemFactory = (function(configuration){
         */
         rotate : function(rotateX, rotateY, rotateZ){
             this.jQueryObject.css("-webkit-transform", "perspective(300) rotateX("+rotateX+"deg) " + "rotateY("+rotateY+"deg) " +"rotateZ("+rotateZ+"deg)");
-        }
+        },
+        
+        /*
+        *   Edit the item
+        *
+        *   @Param field
+        *   @Param content    
+        */
+        edit : function(field, content){
+            if(field == configuration.field.title){
+                this.setTitle(content);
+            }
+        },
 
         
     };
@@ -812,14 +843,24 @@ Moka.itemFactory = (function(configuration){
                     $('<img class="'+configuration.pictureContentClass+'" />')));
         }        
     };
+    
+
+    PictureItem.prototype.edit = function(field, content){
+        if(field == configuration.field.imageSrc){
+            this.setSrc(content);
+        }else{
+            Item.prototype.edit.call(this, field, content);
+        }
+    };
+    
 
     PictureItem.prototype.setSrc = function(src){
         this.getContentObject().find('.'+configuration.pictureContentClass).attr("src", src);
-    }
+    };
 
     PictureItem.prototype.setAlt = function(alt){
         this.getContentObject().find('.'+configuration.pictureContentClass).attr("alt", alt);
-    }
+    };
 
     
     /*
