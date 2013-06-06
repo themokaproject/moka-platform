@@ -33,12 +33,21 @@ p{
 
 header{
     font-size           :   2em;
-    border-bottom       :   1px solid #ccc;
-    padding-top         :   20px;
-    padding-left        :   16px;
-    padding-right       :   16px;
-    padding-bottom      :   10px;
+    border-bottom       :   5px solid #33b5e5;
+    padding-top         :   30px;
+    padding-bottom      :   20px;
     position            :   relative;
+    background-color    :   #7d321a;
+    color               :   #FFFFFF;
+    padding-left        :   5%;
+    padding-right       :   5%;
+}
+
+#mokaLogo{
+    width               :   60px;
+    float               :   left;
+    margin-top          :   -35px;
+    margin-right        :   20px;
 }
 
 #fullScreenOverlay{
@@ -132,7 +141,7 @@ header{
 
 .toolBarBox{
     position            :   absolute;
-    top                 :   35px;
+    top                 :   40px;
     left                :   0px;
     width               :   280px;
     background-color    :   #F9F9F9;
@@ -140,9 +149,10 @@ header{
     border              :   1px solid #ccc;
     padding             :   18px;
     text-align          :   left;
-    -webkit-box-shadow  :  1px 1px 1px 1px #ccc;       
-    box-shadow          :  1px 1px 1px 1px #ccc;    
+    -webkit-box-shadow  :   1px 1px 1px 1px rgba(204, 204, 204, 0.5);
+    box-shadow          :   1px 1px 1px 1px rgba(204, 204, 204, 0.5);    
     display             :   none;
+    color               :   #000000;
 }
 
 .toolBarBoxTable{

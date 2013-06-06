@@ -91,8 +91,8 @@ Moka.platformConfiguration = (function(){
         overlayCssId            :   "fullScreenOverlay", 
         lightBoxContainerCssId  :   "lightBoxContainer",
         lightBoxMessageCssId    :   "lightBoxMessage",
-        cancelIcon              :   "./images/cancel_icon.png",
-        connectionIcon          :   "./images/connection_icon.png",
+        cancelIcon              :   "./images/cancel_icon_dark.png",
+        connectionIcon          :   "./images/connection_icon_dark.png",
         rotatingCssClass        :   "rotationAnimation",
         messageType             :   {
             addUser         :   "addUser",
