@@ -132,7 +132,7 @@ Moka.itemFactoryConfiguration = (function(){
         postItType                  :   "post-it",
         postItTitle                 :   "Post-it",
         postItContentClass          :   "postItContent",
-        postItContent               :   "Here goes your note [...]",
+        postItContent               :   "",
         umlClassType                :   "umlClass",
         umlClassContentClass        :   "umlContent",
         umlClassContentTitleClass   :   "umlTitle",
@@ -141,14 +141,21 @@ Moka.itemFactoryConfiguration = (function(){
         umlMethodsClass             :   "umlMethods",
         umlMethodClass              :   "umlMethod",
         umlTitle                    :   "Uml Class",
+        mediaContainerClass         :   "mediaContainer",
+        mediaFillDivClass           :   "fillDiv",
         pictureType                 :   "image", 
-        pictureContentClass         :   "img-fill-div",
+        pictureContentClass         :   "pictureContent",
         pictureTitle                :   "Picture",
-        pictureContainerClass       :   "pictureContainer",
         defaultPictureSrc           :   "./images/default_picture.gif",
+        videoType                   :   "video",
+        iframeType                  :   "iframe",
+        iframeContentClass          :   "iframeContent",
+        iframeTitle                  :   "Video",
         field                       :   {
-                title       :   "title",
-                imageSrc    :   "url",
+                title           :   "title",
+                imageSrc        :   "url",
+                iframeSrc       :   "link",
+                postItContent   :   "content",
         },
     };
 })();
@@ -744,6 +751,14 @@ Moka.itemFactory = (function(configuration){
         this.jQueryObject.find('.'+configuration.postItContentClass).text(text);
     };
     
+    PostItItem.prototype.edit = function(field, content){
+        if(field == configuration.field.postItContent){
+            this.setText(content);
+        }else{
+            Item.prototype.edit.call(this, field, content);
+        }
+    };
+    
     /*
     *   Uml Class Item Constructor
     *       extends Item
@@ -820,12 +835,11 @@ Moka.itemFactory = (function(configuration){
 
 
     /*
-    *   Uml Class Item Constructor
+    *   Picture Item Constructor
     *       extends Item
     */
     var PictureItem = function(id){
         Item.call(this, id);
-        this.url = "";
     };
 
     PictureItem.prototype = new Item();
@@ -839,8 +853,8 @@ Moka.itemFactory = (function(configuration){
         }else{
             Item.prototype.init.call(this, null);
             this.getContentObject().append(
-                $('<div class="'+configuration.pictureContainerClass+'"/>').append(
-                    $('<img class="'+configuration.pictureContentClass+'" />')));
+                $('<div class="'+configuration.mediaContainerClass+'"/>').append(
+                    $('<img class="'+configuration.mediaFillDivClass+' '+configuration.pictureContentClass+'" />')));
         }        
     };
     
@@ -860,6 +874,45 @@ Moka.itemFactory = (function(configuration){
 
     PictureItem.prototype.setAlt = function(alt){
         this.getContentObject().find('.'+configuration.pictureContentClass).attr("alt", alt);
+    };
+    
+    
+    /*
+    *   Video Item Constructor
+    *       extends Item
+    */
+    var IframeItem = function(id){
+        Item.call(this, id);
+    };
+
+    IframeItem.prototype = new Item();
+
+    /*
+    *   Initialize the jQueryObject
+    */
+    IframeItem.prototype.init = function(jQueryObject){
+        if(jQueryObject){
+            this.jQueryObject = jQueryObject;
+        }else{
+            Item.prototype.init.call(this, null);
+            this.getContentObject().append(
+                $('<div class="'+configuration.mediaContainerClass+'"/>').append(
+                    $('<iframe class="'+configuration.iframeContentClass+' '+configuration.mediaFillDivClass+'" src="" frameborder="0" allowfullscreen></iframe>')));
+        }        
+    };
+    
+
+    IframeItem.prototype.edit = function(field, content){
+        if(field == configuration.field.iframeSrc){
+            this.setSrc(content);
+        }else{
+            Item.prototype.edit.call(this, field, content);
+        }
+    };
+    
+
+    IframeItem.prototype.setSrc = function(src){
+        this.getContentObject().find('.'+configuration.iframeContentClass).attr("src", src);
     };
 
     
@@ -896,6 +949,17 @@ Moka.itemFactory = (function(configuration){
         return newPictureItem;
     }
     
+     /*
+    *   Create a new iframe
+    */    
+    var createIframe = function(id){
+        var newIframeItem = new IframeItem(id);
+        newIframeItem.init();
+        newIframeItem.setTitle(configuration.iframeTitle+" "+id);
+        newIframeItem.setSrc("");
+        return newIframeItem;
+    }
+    
     
     var createItem = function(type, id) {
         if(type === configuration.umlClassType){
@@ -904,6 +968,8 @@ Moka.itemFactory = (function(configuration){
             return createPostIt(id);
         }else if(type === configuration.pictureType){
             return createPicture(id);
+        }else if(type === configuration.videoType){
+            return createIframe(id);
         }        
         return null;
     };
