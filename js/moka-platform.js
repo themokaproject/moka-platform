@@ -155,7 +155,7 @@ Moka.itemFactoryConfiguration = (function(){
         field                       :   {
                 title           :   "title",
                 imageSrc        :   "url",
-                iframeSrc       :   "link",
+                iframeSrc       :   "url",
                 videoSrc        :   "url",
                 postItContent   :   "content",
         },
@@ -307,7 +307,7 @@ Moka.platform = (function(configuration){
                 rotateItem(messageContent.itemId, messageContent.rotateX, messageContent.rotateY, messageContent.rotateZ);
                 break;
                 
-            case messageTypes.editItem :
+            case messageTypes.editItem : 
                 editItem(messageContent.itemId, messageContent.field, messageContent.content);
                 
             default:
@@ -1010,6 +1010,8 @@ Moka.itemFactory = (function(configuration){
             return createPicture(id);
         }else if(type === configuration.videoType){
             return createVideo(id);
+        }else if(type === configuration.iframeType){
+            return createIframe(id);
         }        
         return null;
     };
