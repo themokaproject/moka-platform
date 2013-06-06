@@ -150,11 +150,13 @@ Moka.itemFactoryConfiguration = (function(){
         videoType                   :   "video",
         iframeType                  :   "iframe",
         iframeContentClass          :   "iframeContent",
-        iframeTitle                  :   "Video",
+        iframeTitle                 :   "Iframe",
+        videoTitle                  :   "Video",
         field                       :   {
                 title           :   "title",
                 imageSrc        :   "url",
                 iframeSrc       :   "link",
+                videoSrc        :   "url",
                 postItContent   :   "content",
         },
     };
@@ -878,7 +880,7 @@ Moka.itemFactory = (function(configuration){
     
     
     /*
-    *   Video Item Constructor
+    *   Iframe Item Constructor
     *       extends Item
     */
     var IframeItem = function(id){
@@ -914,6 +916,33 @@ Moka.itemFactory = (function(configuration){
     IframeItem.prototype.setSrc = function(src){
         this.getContentObject().find('.'+configuration.iframeContentClass).attr("src", src);
     };
+    
+    
+    
+    /*
+    *   Video Item Constructor
+    *       extends IframeItem
+    */
+    var VideoItem = function(id){
+        IframeItem.call(this, id);
+    };
+
+    VideoItem.prototype = new IframeItem();
+    
+    VideoItem.prototype.edit = function(field, content){
+        if(field == configuration.field.videoSrc){
+            content = getURLParameter(content, "v");
+            content = "http://www.youtube.com/embed/"+content+"?rel=0";
+            this.setSrc(content);
+        }else{
+            IframeItem.prototype.edit.call(this, field, content);
+        }
+        
+    }
+    
+    var getURLParameter = function(url, name) {
+        return decodeURI((RegExp(name + '=' + '(.+?)(&|$)').exec(url)||[,null])[1]);
+    };    
 
     
     /*
@@ -960,6 +989,17 @@ Moka.itemFactory = (function(configuration){
         return newIframeItem;
     }
     
+     /*
+    *   Create a new video
+    */    
+    var createVideo = function(id){
+        var newVideoItem = new VideoItem(id);
+        newVideoItem.init();
+        newVideoItem.setTitle(configuration.videoTitle+" "+id);
+        newVideoItem.setSrc("");
+        return newVideoItem;
+    }
+    
     
     var createItem = function(type, id) {
         if(type === configuration.umlClassType){
@@ -969,7 +1009,7 @@ Moka.itemFactory = (function(configuration){
         }else if(type === configuration.pictureType){
             return createPicture(id);
         }else if(type === configuration.videoType){
-            return createIframe(id);
+            return createVideo(id);
         }        
         return null;
     };
