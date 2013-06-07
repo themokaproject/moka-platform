@@ -683,7 +683,7 @@ Moka.itemFactory = (function(configuration){
         *   @Param left
         */
         move : function(pTop, pLeft){
-            this.jQueryObject.css({top: pTop+"px", left: pLeft+"px"});
+            this.jQueryObject.animate({top: pTop+"px", left: pLeft+"px"}, 1);
         },
 
         /*
