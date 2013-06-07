@@ -154,9 +154,7 @@ Moka.itemFactoryConfiguration = (function(){
         videoTitle                  :   "Video",
         field                       :   {
                 title           :   "title",
-                imageSrc        :   "url",
-                iframeSrc       :   "url",
-                videoSrc        :   "url",
+                urlSrc          :   "url",
                 postItContent   :   "content",
         },
     };
@@ -275,8 +273,8 @@ Moka.platform = (function(configuration){
                 break;
             
             case messageTypes.addItem :
-                addItem(messageContent.type, messageContent.itemId, messageContent.top, messageContent.left, 
-                    messageContent.width, messageContent.height, messageContent.title, messageContent.rotateX, messageContent.rotateY, messageContent.rotateZ);
+                addItem(messageContent.type, messageContent.itemId, messageContent.content, messageContent.top, messageContent.left, 
+                    messageContent.width, messageContent.height, messageContent.rotateX, messageContent.rotateY, messageContent.rotateZ);
                 break;
 
             case messageTypes.removeItem :
@@ -309,6 +307,7 @@ Moka.platform = (function(configuration){
                 
             case messageTypes.editItem : 
                 editItem(messageContent.itemId, messageContent.field, messageContent.content);
+                break;
                 
             default:
                 console.log("unsupported message: " + message);
@@ -355,7 +354,7 @@ Moka.platform = (function(configuration){
         }
     };
     
-    var addItem = function(type, id, top, left, width, height, title, rotateX, rotateY, rotateZ){
+    var addItem = function(type, id, content, top, left, width, height, rotateX, rotateY, rotateZ){
         if(getItemById(id) != null) return false;
         var temp = Moka.itemFactory.createItem(type, id);
         if(temp != null){
@@ -363,8 +362,11 @@ Moka.platform = (function(configuration){
             itemContainer.append(temp.jQueryObject);
             temp.move(top, left);
             temp.resize(width, height);
-            temp.setTitle(title);
             temp.rotate(rotateX,rotateY,rotateZ);
+            content = JSON.parse(content);
+            for (var i = 0; i < content.length; i++) {
+                temp.edit(content[i].field, content[i].content);
+            }
         }
         return true;
     };
@@ -862,7 +864,7 @@ Moka.itemFactory = (function(configuration){
     
 
     PictureItem.prototype.edit = function(field, content){
-        if(field == configuration.field.imageSrc){
+        if(field == configuration.field.urlSrc){
             this.setSrc(content);
         }else{
             Item.prototype.edit.call(this, field, content);
@@ -905,7 +907,7 @@ Moka.itemFactory = (function(configuration){
     
 
     IframeItem.prototype.edit = function(field, content){
-        if(field == configuration.field.iframeSrc){
+        if(field == configuration.field.urlSrc){
             this.setSrc(content);
         }else{
             Item.prototype.edit.call(this, field, content);
@@ -930,7 +932,7 @@ Moka.itemFactory = (function(configuration){
     VideoItem.prototype = new IframeItem();
     
     VideoItem.prototype.edit = function(field, content){
-        if(field == configuration.field.videoSrc){
+        if(field == configuration.field.urlSrc){
             content = getURLParameter(content, "v");
             content = "http://www.youtube.com/embed/"+content+"?rel=0";
             this.setSrc(content);
