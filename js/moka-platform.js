@@ -26,8 +26,8 @@ var Moka = Moka || {};
 *       example {type: "removeUser, content: {userId: 12}}
 *
 *       addItem message structure
-*       - content : type, itemId, top, left, width, height, title
-*       example {type: "addItem, content: {type: "umlClass", itemId: 7, top: 250, left: 350, width: 200, height: 300, title: "myItem_2", rotateZ}}
+*       - content : type, itemId, content, top, left, width, height, rotateX, rotateY, rotateZ
+*       example {type: "addItem, content: {type: "umlClass", itemId: 7, content: "[{title: "coucou"}]", top: 250, left: 350, width: 200, height: 300, rotateX, rotateY, rotateZ}}
 *
 *       removeItem message structure
 *       - content : itemId
@@ -682,9 +682,8 @@ Moka.itemFactory = (function(configuration){
         *   @Param top
         *   @Param left
         */
-        move : function(top, left){
-            this.jQueryObject.css("top", top+"px");
-            this.jQueryObject.css("left", left+"px");
+        move : function(pTop, pLeft){
+            this.jQueryObject.css({top: pTop+"px", left: pLeft+"px"});
         },
 
         /*
@@ -693,9 +692,8 @@ Moka.itemFactory = (function(configuration){
         *   @Param width
         *   @Param height
         */
-        resize : function(width, height){
-            this.jQueryObject.css("width", width+"px");
-            this.jQueryObject.css("height", height+"px");
+        resize : function(pWidth, pHeight){
+            this.jQueryObject.animate({width: pWidth+"px", height: pHeight+"px"}, 100);
         },
         
         /*
