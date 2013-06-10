@@ -13,7 +13,7 @@ var Moka = Moka || {};
 *
 *       main structure
 *       - type
-*       - content       
+*       - content
 *       types currently supported : addUser, removeUser, addItem, removeItem, moveItem, selectItem, unselectItem
 *       example {type: "myType", content: "myContent"}
 *
@@ -34,7 +34,7 @@ var Moka = Moka || {};
 *       example {type: "removeItem, content: {itemId: 7}}
 *
 *       moveItem message structure
-*       - content : itemId, top, left   
+*       - content : itemId, top, left
 *       example {type: "moveItem, content: {itemId: 7, top: 250, left: 433}}
 *
 *       rotateItem message structure
@@ -88,7 +88,7 @@ Moka.platformConfiguration = (function(){
         portInputCssId          :   "platformPort",
         dragZoneCssId           :   "dragZone",
         dropZoneCssId           :   "dropZone",
-        overlayCssId            :   "fullScreenOverlay", 
+        overlayCssId            :   "fullScreenOverlay",
         lightBoxContainerCssId  :   "lightBoxContainer",
         lightBoxMessageCssId    :   "lightBoxMessage",
         cancelIcon              :   "./images/cancel_icon_dark.png",
@@ -112,9 +112,9 @@ Moka.platformConfiguration = (function(){
             "#70CBED",
             "#B7DB4C",
             "#FFCF70",
-            "#C394DB"                
+            "#C394DB"
         ],
-        
+
     };
 })();
 
@@ -128,7 +128,7 @@ Moka.itemFactoryConfiguration = (function(){
         itemPrefixId                :   "item_",
         itemContentClass            :   "itemContent",
         itemContributionsClass      :   "itemContributions",
-        itemContentTitleClass       :   "itemContentTitle", 
+        itemContentTitleClass       :   "itemContentTitle",
         postItType                  :   "post-it",
         postItTitle                 :   "Post-it",
         postItContentClass          :   "postItContent",
@@ -143,7 +143,7 @@ Moka.itemFactoryConfiguration = (function(){
         umlTitle                    :   "Uml Class",
         mediaContainerClass         :   "mediaContainer",
         mediaFillDivClass           :   "fillDiv",
-        pictureType                 :   "image", 
+        pictureType                 :   "image",
         pictureContentClass         :   "pictureContent",
         pictureTitle                :   "Picture",
         defaultPictureSrc           :   "./images/default_picture.gif",
@@ -170,13 +170,13 @@ Moka.userConfiguration = (function(){
         userInfoContentCssClass     :   "userInfoContent",
         userInfoPerCentCssClass     :   "userInfoPerCent",
         userInfoColorCssClass       :   "userInfoColor",
-        
+
     };
 })();
 
 Moka.platform = (function(configuration){
     "use strict";
-    
+
     //private properties & methods
     var webSocket;
     var userList = [];
@@ -184,7 +184,7 @@ Moka.platform = (function(configuration){
     var itemList = [];
     var itemContainer = $("#"+configuration.itemContainerCssId);
     var status = "disconnected";
-    
+
     /*
     *   Private Methods
     *
@@ -198,8 +198,8 @@ Moka.platform = (function(configuration){
     *   addItem
     *   removeItem
     *   getItemById
-    */    
-    
+    */
+
     var onWebSocketOpen = function(event){
         console.log("open");
         status = "connected";
@@ -213,7 +213,7 @@ Moka.platform = (function(configuration){
         $('#'+configuration.saveCssId).show();
         $('#'+configuration.uploadCssId).show();
     };
-    
+
     var onWebSocketClose = function(event){
         console.log("close");
         status = "disconnected";
@@ -225,7 +225,7 @@ Moka.platform = (function(configuration){
         $('#'+configuration.uploadCssId).hide();
         $("#"+configuration.uploadBoxCssId).hide();
     };
-    
+
     var onWebSocketMessage = function(event){
         try {
             processMessage(eval("("+event.data+")"));
@@ -234,13 +234,13 @@ Moka.platform = (function(configuration){
             console.log("Not a valid JSON message :" + event.data);
         }
     };
-    
+
     var onWebSocketError = function(event){
         console.log("error");
-    }; 
-    
-    
-    
+    };
+
+
+
     var addUser = function(id, name){
         if(getUserById(id) != null) return false;
         var color = configuration.userColors[userList.length];
@@ -248,7 +248,7 @@ Moka.platform = (function(configuration){
         userList.push(newUser);
         userContainer.append(newUser.getUserInfo());
         return true;
-    }; 
+    };
 
     var saveWorkSpace = function(workSpace){
         $("#"+configuration.settingBoxCssId).hide();
@@ -256,24 +256,24 @@ Moka.platform = (function(configuration){
         $("#"+configuration.aboutBoxCssId).hide();
         $("#"+configuration.saveBoxCssId).show();
         var textFileAsBlob = new Blob([workSpace], {type:'text/plain'});
-        $("#"+configuration.saveActionCssId).attr("href", window.webkitURL.createObjectURL(textFileAsBlob));     
-    }
-    
+        $("#"+configuration.saveActionCssId).attr("href", window.webkitURL.createObjectURL(textFileAsBlob));
+    };
+
     var processMessage = function(message){
         var messageContent = message.content;
         var messageTypes = configuration.messageType;
-        
-        switch(message.type){        
+
+        switch(message.type){
             case messageTypes.addUser :
                 addUser(messageContent.userId, messageContent.name);
                 break;
-                
+
             case messageTypes.removeUser :
                 removeUser(messageContent.userId);
                 break;
-            
+
             case messageTypes.addItem :
-                addItem(messageContent.type, messageContent.itemId, messageContent.content, messageContent.top, messageContent.left, 
+                addItem(messageContent.type, messageContent.itemId, messageContent.content, messageContent.top, messageContent.left,
                     messageContent.width, messageContent.height, messageContent.rotateX, messageContent.rotateY, messageContent.rotateZ);
                 break;
 
@@ -292,44 +292,44 @@ Moka.platform = (function(configuration){
             case messageTypes.selectItem :
                 selectItem(messageContent.userId, messageContent.itemId);
                 break;
-                
+
             case messageTypes.unselectItem :
                 unselectItem(messageContent.itemId);
                 break;
-                
+
             case messageTypes.saveWorkSpace :
                 saveWorkSpace(JSON.stringify(messageContent));
                 break;
-                
+
             case messageTypes.rotateItem :
                 rotateItem(messageContent.itemId, messageContent.rotateX, messageContent.rotateY, messageContent.rotateZ);
                 break;
-                
-            case messageTypes.editItem : 
+
+            case messageTypes.editItem :
                 editItem(messageContent.itemId, messageContent.field, messageContent.content);
                 break;
-                
+
             default:
                 console.log("unsupported message: " + message);
                 console.log(message);
                 break;
-        };
+        }
     };
-    
+
     var editItem = function(itemId, field, content){
         var itemSearch = getItemById(itemId);
         if(itemSearch != null){
             itemSearch.item.edit(field, content);
         }
     };
-    
+
     var unselectItem = function(itemId){
         var itemSearch = getItemById(itemId);
         if(itemSearch != null){
             itemSearch.item.unLock();
         }
     };
-    
+
     var selectItem = function(userId, itemId){
         var itemRes = getItemById(itemId);
         var userRes = getUserById(userId);
@@ -337,15 +337,15 @@ Moka.platform = (function(configuration){
             itemRes.item.lock(userRes.user.color);
         }
     };
-    
+
     var getUserById = function(id){
         var userListLength = userList.length;
-        for(var i=0; i< userListLength; i++){ 
+        for(var i=0; i< userListLength; i++){
             if(userList[i].getId() === id) return {index: i, user: userList[i]};
         }
         return null;
     };
-    
+
     var removeUser = function(id){
         var temp = getUserById(id);
         if(temp != null){
@@ -353,7 +353,7 @@ Moka.platform = (function(configuration){
             userList.splice(temp.index, 1);
         }
     };
-    
+
     var addItem = function(type, id, content, top, left, width, height, rotateX, rotateY, rotateZ){
         if(getItemById(id) != null) return false;
         var temp = Moka.itemFactory.createItem(type, id);
@@ -370,7 +370,7 @@ Moka.platform = (function(configuration){
         }
         return true;
     };
-    
+
     var getItemById = function(id){
         var itemListLength = itemList.length;
         for(var i=0; i< itemListLength; i++){
@@ -378,7 +378,7 @@ Moka.platform = (function(configuration){
         }
         return null;
     };
-    
+
     var removeItem = function(id){
         var temp = getItemById(id);
         if(temp != null){
@@ -386,7 +386,7 @@ Moka.platform = (function(configuration){
             itemList.splice(temp.index, 1);
         }
     };
-    
+
     var moveItem = function(id, top, left){
         var temp = getItemById(id);
         if(temp != null){
@@ -400,21 +400,21 @@ Moka.platform = (function(configuration){
             temp.item.resize(width, height);
         }
     };
-    
-    var rotateItem = function(id, rotateX, rotateY, rotateZ){      
+
+    var rotateItem = function(id, rotateX, rotateY, rotateZ){
         var temp = getItemById(id);
         if(temp != null){
             temp.item.rotate(rotateX, rotateY, rotateZ);
         }
     };
-    
+
     var dragEnterHandler = function(event) {
         event.stopPropagation();
         event.preventDefault();
         $("#"+configuration.dropZoneCssId).show();
         $("#"+configuration.overlayCssId).show();
         $("#"+configuration.lightBoxContainerCssId).css("display", "table");
-        if(status == "connected") {        
+        if(status == "connected") {
             $("#"+configuration.overlayCssId).css("background-color", "#B7DB4C");
             $("#"+configuration.lightBoxMessageCssId).text("Drop a file to load a project");
         } else {
@@ -422,12 +422,12 @@ Moka.platform = (function(configuration){
             $("#"+configuration.lightBoxMessageCssId).text("Connect the platform before loading a project");
         }
     };
-    
+
     var dragOverHandler = function(event) {
         event.stopPropagation();
         event.preventDefault();
-    }
-    
+    };
+
     var dragLeaveHandler = function(event) {
         event.stopPropagation();
         event.preventDefault();
@@ -435,7 +435,7 @@ Moka.platform = (function(configuration){
         $("#"+configuration.overlayCssId).hide();
         $("#"+configuration.lightBoxContainerCssId).hide();
     };
-    
+
     var dropHandler = function(event) {
         event.stopPropagation();
         event.preventDefault();
@@ -444,141 +444,141 @@ Moka.platform = (function(configuration){
         $("#"+configuration.lightBoxContainerCssId).hide();
         if(status != "connected") return;
 
-        
+
         var files = event.originalEvent.dataTransfer.files;
         var count = files.length;
-        
+
         if(count >0) {
             var file = files[0];
             var reader = new FileReader();
             reader.onload = uploadProject;
-            reader.readAsText(file);            
+            reader.readAsText(file);
         }
-    }
-    
+    };
+
     var uploadProject = function(event) {
         console.log(event.target.result);
         itemList = [];
         itemContainer.empty();
-        webSocket.send(JSON.stringify({type:"upload", content : event.target.result }));        
-    }
-    
-    
+        webSocket.send(JSON.stringify({type:"upload", content : event.target.result }));
+    };
+
+
     /*
     *   MokaPlatform Constructor
     */
     var MokaPlatform = function(){
         var these = this;
         $("#"+configuration.actionCssId).bind("click", function(){
-            if(status === "disconnected") {                
+            if(status === "disconnected") {
                 these.run();
             } else if (status === "connected") {
                 these.close();
             }
         });
-        
+
         $("#"+configuration.saveCssId).bind("click", function(){
             if(status === "connected") {
                 if($("#"+configuration.saveBoxCssId).is(":visible")){
                     $("#"+configuration.saveBoxCssId).hide();
-                }else{                    
+                }else{
                     askToSaveWorkSpace();
                 }
-            }            
+            }
         });
-        
+
         $("#"+configuration.saveInputFileNameCssId).bind("keyup", function(){
             $("#"+configuration.saveActionCssId).attr("download", $("#"+configuration.saveInputFileNameCssId).val());
-        });                
-        
+        });
+
         $("#"+configuration.settingCssId).bind("click", function(){
            $("#"+configuration.settingBoxCssId).toggle();
            $("#"+configuration.saveBoxCssId).hide();
            $("#"+configuration.uploadBoxCssId).hide();
            $("#"+configuration.aboutBoxCssId).hide();
         });
-        
+
         $("#"+configuration.uploadCssId).bind("click", function(){
            $("#"+configuration.settingBoxCssId).hide();
            $("#"+configuration.saveBoxCssId).hide();
            $("#"+configuration.uploadBoxCssId).toggle();
            $("#"+configuration.aboutBoxCssId).hide();
         });
-        
+
          $("#"+configuration.aboutCssId).bind("click", function(){
            $("#"+configuration.settingBoxCssId).hide();
            $("#"+configuration.saveBoxCssId).hide();
            $("#"+configuration.uploadBoxCssId).hide();
            $("#"+configuration.aboutBoxCssId).toggle();
         });
-        
+
         $("#"+configuration.hostIpInputCssId).bind("keyup", function(){
             these.setHostIp($("#"+configuration.hostIpInputCssId).val());
         });
-        
+
         $("#"+configuration.portInputCssId).bind("keyup", function(){
             these.setPort($("#"+configuration.portInputCssId).val());
         });
-        
+
         $("#"+configuration.hostIpInputCssId).val(configuration.hostIp);
         $("#"+configuration.portInputCssId).val(configuration.port);
-        
+
         $("#"+configuration.dragZoneCssId).bind("dragenter", dragEnterHandler);
         $("#"+configuration.dropZoneCssId).bind("dragleave", dragLeaveHandler);
         $("#"+configuration.dropZoneCssId).bind("dragover", dragOverHandler);
         $("#"+configuration.dropZoneCssId).bind("drop", dropHandler);
     };
-    
+
     var askToSaveWorkSpace = function() {
         webSocket.send(JSON.stringify({type:"backUp", content : "" }));
     };
-    
+
     //public API -- methods
-    MokaPlatform.prototype = {      
-        
+    MokaPlatform.prototype = {
+
         setHostIp : function(ip){
             configuration.hostIp = ip;
         },
-        
+
         setPort : function(port){
             configuration.port = port;
         },
-        
+
         run : function(){
             status = "connecting";
             $("#"+configuration.statusCssId).text("Connecting");
             $("#"+configuration.actionCssId).attr("src", configuration.connectionIcon);
             $("#"+configuration.actionCssId).addClass(configuration.rotatingCssClass);
-            
+
             //<3 rotation effect, let's spin for at least 1.5sec
             setTimeout(function(){
-                webSocket = new WebSocket('ws://'+configuration.hostIp+':'+configuration.port);            
-                webSocket.onopen    = function(event){ onWebSocketOpen(event);      };            
-                webSocket.onclose   = function(event){ onWebSocketClose(event);     };            
-                webSocket.onmessage = function(event){ onWebSocketMessage(event);   };            
-                webSocket.onerror   = function(event){ onWebSocketError(event);     }; 
+                webSocket = new WebSocket('ws://'+configuration.hostIp+':'+configuration.port);
+                webSocket.onopen    = function(event){ onWebSocketOpen(event);      };
+                webSocket.onclose   = function(event){ onWebSocketClose(event);     };
+                webSocket.onmessage = function(event){ onWebSocketMessage(event);   };
+                webSocket.onerror   = function(event){ onWebSocketError(event);     };
             }, 1500);
-                  
+
         },
-        
+
         close : function(){
             status = "disconnected";
             webSocket.close();
         },
-        
+
         //TODO remove
         processMessage : processMessage,
     };
-    
-    return MokaPlatform;    
+
+    return MokaPlatform;
 })(Moka.platformConfiguration);
 
 /*
 *   Moka.User
 */
 Moka.User = (function(configuration){
-    "use strict";    
-    
+    "use strict";
+
     var initUserInfo = function(id, name, color){
         var userInfo = $('<div class="'+configuration.userInfoCssClass+'" id="user_'+id+'" />');
         var userInfoContent = $('<div class="'+configuration.userInfoContentCssClass+'" />');
@@ -588,18 +588,18 @@ Moka.User = (function(configuration){
         userInfo.append($('<div class="'+configuration.userInfoColorCssClass+'" style="background-color: '+color+'" />'));
         return userInfo;
     };
-    
+
     //constructor
     var User = function(id, name, color){
         this.color = color;
         var userInfo = initUserInfo(id, name, color);
-        this.getId = function(){ return id; }; 
+        this.getId = function(){ return id; };
         this.getName = function(){ return name; };
         this.getUserInfo = function(){ return userInfo; };
-    };  
-    
-    
-    return User;    
+    };
+
+
+    return User;
 })(Moka.userConfiguration);
 
 
@@ -611,7 +611,7 @@ Moka.User = (function(configuration){
 */
 Moka.itemFactory = (function(configuration){
     "use strict";
-    
+
     /*
     *   Item Constructor
     */
@@ -619,9 +619,9 @@ Moka.itemFactory = (function(configuration){
         this.jQueryObject;
         this.getId = function(){ return id; };
     };
-    
-    Item.prototype = { 
-    
+
+    Item.prototype = {
+
         /*
         *   Initialize the jQueryObject
         */
@@ -632,41 +632,41 @@ Moka.itemFactory = (function(configuration){
                 this.jQueryObject = $('<div id="'+configuration.itemPrefixId+this.getId()+'"class="'+configuration.itemCssClass+'"/>');
                 this.jQueryObject.append($('<div class="'+configuration.itemContentClass+'"/>')
                     .append('<div class="'+configuration.itemContentTitleClass+'" />'));
-                this.jQueryObject.append($('<div class="'+configuration.itemContributionsClass+'"/>')); 
-            }                   
+                this.jQueryObject.append($('<div class="'+configuration.itemContributionsClass+'"/>'));
+            }
         },
-        
+
         unLock : function(){
             this.getContributions().empty();
         },
-        
-        lock : function(color){        
+
+        lock : function(color){
             var selection = $('<div class="itemContribution"/>');
             selection.css("background-color", color);
-            this.getContributions().append(selection);                
+            this.getContributions().append(selection);
         },
-        
+
         /*
         *   Retrieve the "Content" division as a jQueryObject
         */
         getContentObject : function(){
             return this.jQueryObject.find("."+configuration.itemContentClass);
         },
-        
+
         /*
         *   Retrieve the "ContentTitle" division as a jQueryObject
         */
         getContentTitleObject : function(){
             return this.jQueryObject.find("."+configuration.itemContentTitleClass);
         },
-        
+
         /*
-        *   Retrieve the "Contributions" division as a jQueryObject        
+        *   Retrieve the "Contributions" division as a jQueryObject
         */
         getContributions : function(){
             return this.jQueryObject.find("."+configuration.itemContributionsClass);
         },
-        
+
         /*
         *   Set the title of the Item
         *
@@ -675,9 +675,9 @@ Moka.itemFactory = (function(configuration){
         setTitle : function(title){
             this.getContentTitleObject().text(title);
         },
-        
+
         /*
-        *   Move the item 
+        *   Move the item
         *
         *   @Param top
         *   @Param left
@@ -695,7 +695,7 @@ Moka.itemFactory = (function(configuration){
         resize : function(pWidth, pHeight){
             this.jQueryObject.animate({width: pWidth+"px", height: pHeight+"px"}, 100);
         },
-        
+
         /*
         *   Rotate the item
         *
@@ -706,12 +706,12 @@ Moka.itemFactory = (function(configuration){
         rotate : function(rotateX, rotateY, rotateZ){
             this.jQueryObject.css("-webkit-transform", "perspective(300) rotateX("+rotateX+"deg) " + "rotateY("+rotateY+"deg) " +"rotateZ("+rotateZ+"deg)");
         },
-        
+
         /*
         *   Edit the item
         *
         *   @Param field
-        *   @Param content    
+        *   @Param content
         */
         edit : function(field, content){
             if(field == configuration.field.title){
@@ -719,9 +719,9 @@ Moka.itemFactory = (function(configuration){
             }
         },
 
-        
+
     };
-    
+
     /*
     *   Post-It Item Constructor
     *       extends Item
@@ -729,9 +729,9 @@ Moka.itemFactory = (function(configuration){
     var PostItItem = function(id){
         Item.call(this, id);
     };
-    
+
     PostItItem.prototype = new Item();
-    
+
     /*
     *   Initialize the jQueryObject
     */
@@ -741,9 +741,9 @@ Moka.itemFactory = (function(configuration){
         }else{
             Item.prototype.init.call(this, null);
             this.getContentObject().append($('<p class="'+configuration.postItContentClass+'" />'));
-        }        
+        }
     };
-    
+
     /*
     *   Set the text of the Post-It
     *
@@ -752,7 +752,7 @@ Moka.itemFactory = (function(configuration){
     PostItItem.prototype.setText = function(text){
         this.jQueryObject.find('.'+configuration.postItContentClass).text(text);
     };
-    
+
     PostItItem.prototype.edit = function(field, content){
         if(field == configuration.field.postItContent){
             this.setText(content);
@@ -760,7 +760,7 @@ Moka.itemFactory = (function(configuration){
             Item.prototype.edit.call(this, field, content);
         }
     };
-    
+
     /*
     *   Uml Class Item Constructor
     *       extends Item
@@ -770,9 +770,9 @@ Moka.itemFactory = (function(configuration){
         this.attributes = [];
         this.methods = [];
     };
-    
+
     UmlClassItem.prototype = new Item();
-    
+
     /*
     *   Initialize the jQueryObject
     */
@@ -788,7 +788,7 @@ Moka.itemFactory = (function(configuration){
             contentObject.append($('<div class="'+configuration.umlMethodsClass+'" />'));
         }
     };
-    
+
     /*
     *   Update the displayed methods
     */
@@ -801,7 +801,7 @@ Moka.itemFactory = (function(configuration){
             }
         }
     };
-    
+
     /*
     *   Add a method to the Uml Class Item
     *
@@ -811,7 +811,7 @@ Moka.itemFactory = (function(configuration){
         this.methods.push(method);
         this.updateMethods();
     };
-    
+
     /*
     *   Update the displayed attributes
     */
@@ -824,7 +824,7 @@ Moka.itemFactory = (function(configuration){
             }
         }
     };
-    
+
     /*
     *   Add an attribute to the Uml Class Item
     *
@@ -857,9 +857,9 @@ Moka.itemFactory = (function(configuration){
             this.getContentObject().append(
                 $('<div class="'+configuration.mediaContainerClass+'"/>').append(
                     $('<img class="'+configuration.mediaFillDivClass+' '+configuration.pictureContentClass+'" />')));
-        }        
+        }
     };
-    
+
 
     PictureItem.prototype.edit = function(field, content){
         if(field == configuration.field.urlSrc){
@@ -868,7 +868,7 @@ Moka.itemFactory = (function(configuration){
             Item.prototype.edit.call(this, field, content);
         }
     };
-    
+
 
     PictureItem.prototype.setSrc = function(src){
         this.getContentObject().find('.'+configuration.pictureContentClass).attr("src", src);
@@ -877,8 +877,8 @@ Moka.itemFactory = (function(configuration){
     PictureItem.prototype.setAlt = function(alt){
         this.getContentObject().find('.'+configuration.pictureContentClass).attr("alt", alt);
     };
-    
-    
+
+
     /*
     *   Iframe Item Constructor
     *       extends Item
@@ -900,9 +900,9 @@ Moka.itemFactory = (function(configuration){
             this.getContentObject().append(
                 $('<div class="'+configuration.mediaContainerClass+'"/>').append(
                     $('<iframe class="'+configuration.iframeContentClass+' '+configuration.mediaFillDivClass+'" src="" frameborder="0" allowfullscreen></iframe>')));
-        }        
+        }
     };
-    
+
 
     IframeItem.prototype.edit = function(field, content){
         if(field == configuration.field.urlSrc){
@@ -911,14 +911,14 @@ Moka.itemFactory = (function(configuration){
             Item.prototype.edit.call(this, field, content);
         }
     };
-    
+
 
     IframeItem.prototype.setSrc = function(src){
         this.getContentObject().find('.'+configuration.iframeContentClass).attr("src", src);
     };
-    
-    
-    
+
+
+
     /*
     *   Video Item Constructor
     *       extends IframeItem
@@ -928,7 +928,7 @@ Moka.itemFactory = (function(configuration){
     };
 
     VideoItem.prototype = new IframeItem();
-    
+
     VideoItem.prototype.edit = function(field, content){
         if(field == configuration.field.urlSrc){
             content = getURLParameter(content, "v");
@@ -937,38 +937,38 @@ Moka.itemFactory = (function(configuration){
         }else{
             IframeItem.prototype.edit.call(this, field, content);
         }
-        
+
     }
-    
+
     var getURLParameter = function(url, name) {
         return decodeURI((RegExp(name + '=' + '(.+?)(&|$)').exec(url)||[,null])[1]);
-    };    
+    };
 
-    
+
     /*
     *   Create a new post it
     */
     var createPostIt = function(id){
-        var newPostIt = new PostItItem(id); 
+        var newPostIt = new PostItItem(id);
         newPostIt.init();
-        newPostIt.setTitle(configuration.postItTitle+" "+id);               
-        newPostIt.setText($("<p>"+configuration.postItContent+"</p>").text());        
+        newPostIt.setTitle(configuration.postItTitle+" "+id);
+        newPostIt.setText($("<p>"+configuration.postItContent+"</p>").text());
         return newPostIt;
-    }; 
+    };
 
     /*
     *   Create a new uml class
     */
     var createUmlClass = function(id){
-        var newUmlClassItem = new UmlClassItem(id); 
-        newUmlClassItem.init();      
-        newUmlClassItem.setTitle(configuration.umlTitle+" "+id);      
+        var newUmlClassItem = new UmlClassItem(id);
+        newUmlClassItem.init();
+        newUmlClassItem.setTitle(configuration.umlTitle+" "+id);
         return newUmlClassItem;
-    }; 
+    };
 
     /*
     *   Create a new picture
-    */    
+    */
     var createPicture = function(id){
         var newPictureItem = new PictureItem(id);
         newPictureItem.init();
@@ -977,10 +977,10 @@ Moka.itemFactory = (function(configuration){
         newPictureItem.setSrc(configuration.defaultPictureSrc);
         return newPictureItem;
     }
-    
+
      /*
     *   Create a new iframe
-    */    
+    */
     var createIframe = function(id){
         var newIframeItem = new IframeItem(id);
         newIframeItem.init();
@@ -988,10 +988,10 @@ Moka.itemFactory = (function(configuration){
         newIframeItem.setSrc("");
         return newIframeItem;
     }
-    
+
      /*
     *   Create a new video
-    */    
+    */
     var createVideo = function(id){
         var newVideoItem = new VideoItem(id);
         newVideoItem.init();
@@ -999,8 +999,8 @@ Moka.itemFactory = (function(configuration){
         newVideoItem.setSrc("");
         return newVideoItem;
     }
-    
-    
+
+
     var createItem = function(type, id) {
         if(type === configuration.umlClassType){
             return createUmlClass(id);
@@ -1012,12 +1012,12 @@ Moka.itemFactory = (function(configuration){
             return createVideo(id);
         }else if(type === configuration.iframeType){
             return createIframe(id);
-        }        
+        }
         return null;
     };
-    
+
     return {
         createItem      :   createItem,
     };
-    
-})(Moka.itemFactoryConfiguration);   
+
+})(Moka.itemFactoryConfiguration);
