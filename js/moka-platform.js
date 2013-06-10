@@ -201,7 +201,7 @@ Moka.platform = (function(configuration){
     */
 
     var onWebSocketOpen = function(event){
-        console.log("open");
+        //console.log("open");
         status = "connected";
         userList = [];
         itemList = [];
@@ -215,7 +215,7 @@ Moka.platform = (function(configuration){
     };
 
     var onWebSocketClose = function(event){
-        console.log("close");
+        //console.log("close");
         status = "disconnected";
         $("#"+configuration.statusCssId).text("Disconnected");
         $("#"+configuration.actionCssId).attr("src", configuration.connectionIcon);
@@ -230,13 +230,13 @@ Moka.platform = (function(configuration){
         try {
             processMessage(eval("("+event.data+")"));
         } catch (syntaxError) {
-            console.log(syntaxError.message);
-            console.log("Not a valid JSON message :" + event.data);
+            //console.log(syntaxError.message);
+            //console.log("Not a valid JSON message :" + event.data);
         }
     };
 
     var onWebSocketError = function(event){
-        console.log("error");
+        //console.log("error");
     };
 
 
@@ -310,8 +310,8 @@ Moka.platform = (function(configuration){
                 break;
 
             default:
-                console.log("unsupported message: " + message);
-                console.log(message);
+                //console.log("unsupported message: " + message);
+                //console.log(message);
                 break;
         }
     };
@@ -457,7 +457,7 @@ Moka.platform = (function(configuration){
     };
 
     var uploadProject = function(event) {
-        console.log(event.target.result);
+        //console.log(event.target.result);
         itemList = [];
         itemContainer.empty();
         webSocket.send(JSON.stringify({type:"upload", content : event.target.result }));
